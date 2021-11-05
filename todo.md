@@ -1,0 +1,5 @@
+- Detail 的 icon 尚未修正
+- 將專案上 git
+- 加入 docker file
+- 尚未加入公車路線 api
+- 尚未針對定位做出合適的頁面
