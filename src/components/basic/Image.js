@@ -6,6 +6,8 @@ const Container = styled.img`
     width: 100%;
     object-fit: cover;
     display: ${props => props.show === true ? "block" : "none"};
+    background-color: ${props => props.isLoaded === true ? "block" : "none"};
+
 `
 
 const Image = ({ imgSrc }) => {
