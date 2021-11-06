@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { device } from "components/layout/device";
 import PropTypes from "prop-types"
 import { useEffect } from 'react';
@@ -58,11 +58,25 @@ const Container = styled(Link)`
 
 `
 
+const LoadingImageAnimation = keyframes`
+    0% { background-color: white; }
+    10% { background-color: gray; }
+    20% { background-color: white; }
+    30% { background-color: gray; }
+    40% { background-color: white; }
+    50% { background-color: gray; }
+    60% { background-color: white; }
+    70% { background-color: gray; }
+    80% { background-color: white; }
+    90% { background-color: gray; }
+    100% { background-color: white; }
+`
+
 const Image = styled.img`
     width: 100%;
     object-fit: cover;
     display: ${props => props.show === true ? "block" : "none"};
-
+    animation:  ${LoadingImageAnimation}  ${props => props.isLoaded === true ? "" : "5s ease infinite"};
     @media ${device.desktop}{
         height: 140px;
     }
@@ -128,16 +142,12 @@ const Mask = styled.div`
     color: var(--text-color-1);
 `
 
+
 //#endregion
 
 const SmallCard = ({ data, category }) => {
     const [showDetailLink, setShowDetailLink] = useState(false);
-    const { pathname } = useLocation();
-
-    useEffect(() => {
-        console.log(pathname)
-    }, [pathname])
-
+    const [isLoaded, setIsLoaded] = useState(false);
     return (
         <Container
             // target={pathname === "/detail" ? "_self" : "_blank"}
@@ -149,8 +159,11 @@ const SmallCard = ({ data, category }) => {
                 <span>詳細資訊</span>
             </Mask>
             <Image
+                className={"lazy"}
+                isLoaded={isLoaded}
                 show={true}
-                src={data?.Picture?.PictureUrl1 ? data?.Picture?.PictureUrl1 : "./notfound.png"}
+                data-src={data?.Picture?.PictureUrl1 ? data?.Picture?.PictureUrl1 : "./notfound.png"}
+                onLoad={() => { setIsLoaded(true) }}
                 onError={(event) => {
                     event.target.src = "./notfound.png"
                 }}

@@ -7,7 +7,7 @@ import { Searching } from 'components/animation/Animations';
 import { NoFoundData, TriangleLogo, RectangleLogo } from 'components/hub/BasicComponentHub';
 import PropTypes from "prop-types";
 import { useLocation } from 'react-router-dom';
-
+import LazyLoadingImage from 'components/basic/LazyLoadingImage';
 
 //#region styled component
 const Container = styled.div`
@@ -115,11 +115,13 @@ const SmallCardRow = ({
             </Title>
             <SearchingAnimation show={isSearching} />
             <NoFoundData show={isNotFound && !isSearching} />
-            <CardRow show={!isSearching}>
-                {list?.map((data, index) => {
-                    return <SmallCard key={index} data={data} category={category} />
-                })}
-            </CardRow>
+            <LazyLoadingImage >
+                <CardRow show={!isSearching}>
+                    {list?.map((data, index) => {
+                        return <SmallCard key={index} data={data} category={category} />
+                    })}
+                </CardRow>
+            </LazyLoadingImage>
         </Container>
 
     )
