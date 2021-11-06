@@ -45,17 +45,15 @@ const Slider = styled.span`
 `
 //#endregion
 
-const Switch = ({ callback = () => { } }) => {
-
-  const [status, setStatus] = useState(false);
+const Switch = ({ callback, defaultStatus }) => {
 
   useEffect(() => {
-    callback(status);
-  }, [status])
+    console.log(`default ${defaultStatus}`)
+  }, [])
 
   return (
-    <Container onClick={() => { setStatus(!status); }}>
-      <Slider status={status} className="slider" />
+    <Container onClick={() => { callback(!defaultStatus); }}>
+      <Slider status={defaultStatus} />
     </Container>
   )
 }

@@ -46,13 +46,19 @@ const BasicLayout = ({ children }) => {
     const { pathname } = useLocation();
     const history = useHistory();
     const gpsEnabled = useSelector(selectGpsEnable);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkModeEnabled, setDarkModeEnabled] = useState(null);
 
     useEffect(() => {
+        setDarkModeEnabled(localStorage.getItem("darkModel") === "true");
     }, [])
 
+    const changeDarkModel = (enabled) => {
+        localStorage.setItem("darkModel", enabled);
+        setDarkModeEnabled(enabled);
+    }
+
     return (
-        <Container data-theme={darkMode ? "dark" : "light"}>
+        <Container data-theme={darkModeEnabled ? "dark" : "light"}>
             <Header>
                 <Navbar />
                 {pathname === "/bus" ?
@@ -71,7 +77,7 @@ const BasicLayout = ({ children }) => {
             <Main>
                 {children}
             </Main>
-            <Footer setDarkMode={setDarkMode} />
+            <Footer changeDarkModel={changeDarkModel} darkModeEnabled={darkModeEnabled} />
         </Container>
     )
 }

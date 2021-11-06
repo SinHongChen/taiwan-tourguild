@@ -59,7 +59,7 @@ const DarkInfo = styled.div`
     justify-content: center;
 `
 
-const Footer = ({ setDarkMode }) => {
+const Footer = ({ changeDarkModel, darkModeEnabled }) => {
     return (
         <Container>
             <Info>
@@ -77,7 +77,7 @@ const Footer = ({ setDarkMode }) => {
                 </Link>
             </Contact>
             <DarkInfo>
-                <span>開啟夜間模式</span>&nbsp;&nbsp;&nbsp;&nbsp;<Switch callback={(value) => { setDarkMode(value) }} />
+                <span>開啟夜間模式</span>&nbsp;&nbsp;&nbsp;&nbsp;<Switch defaultStatus={darkModeEnabled} callback={(value) => { changeDarkModel(value) }} />
             </DarkInfo>
         </Container>
     )
