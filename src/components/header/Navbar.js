@@ -126,7 +126,7 @@ const Navbar = () => {
                 </NavLink>
                 <NavLink selected={pathname === "/citySearchResult"} to="/" color={"var(--yellow)"} >
                     <Icon src="./Icons/Frame 42.png" />
-                    <span>附近探索</span>
+                    <span>城市探索</span>
                 </NavLink>
                 <NavLink selected={pathname === "/bus"} to="/bus" color={"var(--green)"} >
                     <Icon src="./Icons/Frame 43.png" />

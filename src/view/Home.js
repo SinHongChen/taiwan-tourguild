@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ActivityCardRow, CityCardRow } from 'components/hub/CarRowHub';
+import { ActivityCardRow, CityCardRow } from 'components/hub/CarRows';
 import { cityMenu } from "helpers/menu";
 import { device } from "components/layout/device";
 
@@ -13,11 +13,10 @@ import useActivity from 'hook/useActivity';
 
 const Container = styled.div`
     width: 94%;
-    margin: 40px auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-row-gap: 30px;
-
+    margin:0 auto;
     @media ${device.desktop}{
         padding: 40px 0px;
     }

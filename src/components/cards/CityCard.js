@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { device } from "components/layout/device";
 import PropTypes from "prop-types"
+import { Location as LocationIcon } from 'components/basic/SmallIcons';
 
 //#region styled component
 const Container = styled(Link)`
@@ -52,16 +53,20 @@ const LocationBar = styled.div`
 
 `
 
-const MapIcon = styled.img`
-
-`
-
 const Title = styled.div`
     font-family: Noto Sans TC;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     color: var(--text-color-3);
+`
+
+const CityLocationIcon = styled(LocationIcon)`
+    color: white;
+    margin-bottom: 2px;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
 `
 
 //#endregion
@@ -71,7 +76,7 @@ const CityCard = ({ city }) => {
         <Container to={`citySearchResult?city=${city.value}&category=&keyword=&page=1`}>
             <Image src={city.image} />
             <LocationBar>
-                <MapIcon src="./Icons/Icon/map_M.png" />
+                <CityLocationIcon />
                 <Title>{city.name}</Title>
             </LocationBar>
         </Container>

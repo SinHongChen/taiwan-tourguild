@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { device } from "components/layout/device";
 import PropTypes from "prop-types"
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import {
+    Location as LocationIcon,
+} from "components/basic/SmallIcons";
+import LazyImage from 'components/basic/LazyImage';
+
 //#region styled component
 
 const Container = styled(Link)`
@@ -58,37 +62,6 @@ const Container = styled(Link)`
 
 `
 
-const LoadingImageAnimation = keyframes`
-    0% { background-color: white; }
-    10% { background-color: gray; }
-    20% { background-color: white; }
-    30% { background-color: gray; }
-    40% { background-color: white; }
-    50% { background-color: gray; }
-    60% { background-color: white; }
-    70% { background-color: gray; }
-    80% { background-color: white; }
-    90% { background-color: gray; }
-    100% { background-color: white; }
-`
-
-const Image = styled.img`
-    width: 100%;
-    object-fit: cover;
-    display: ${props => props.show === true ? "block" : "none"};
-    animation:  ${LoadingImageAnimation}  ${props => props.isLoaded === true ? "" : "5s ease infinite"};
-    @media ${device.desktop}{
-        height: 140px;
-    }
-
-    @media ${device.tablet}{
-        height: 120px;
-    }
-
-    @media ${device.mobile}{
-        height: 96px;
-    }
-`
 
 const Title = styled.div`
     font-family: Noto Sans TC;
@@ -121,10 +94,11 @@ const LocationBar = styled.div`
     justify-content: flex-start;
 `
 
-const MapIcon = styled.img`
+const MapIcon = styled(LocationIcon)`
     width: 16px;
     height: 16px;
-    margin-right: 5px;
+    font-size: 16px;
+    margin-right: 8px;
 `
 
 const Mask = styled.div`
@@ -147,7 +121,7 @@ const Mask = styled.div`
 
 const SmallCard = ({ data, category }) => {
     const [showDetailLink, setShowDetailLink] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
+
     return (
         <Container
             // target={pathname === "/detail" ? "_self" : "_blank"}
@@ -158,16 +132,7 @@ const SmallCard = ({ data, category }) => {
             <Mask show={showDetailLink} >
                 <span>詳細資訊</span>
             </Mask>
-            <Image
-                className={"lazy"}
-                isLoaded={isLoaded}
-                show={true}
-                data-src={data?.Picture?.PictureUrl1 ? data?.Picture?.PictureUrl1 : "./notfound.png"}
-                onLoad={() => { setIsLoaded(true) }}
-                onError={(event) => {
-                    event.target.src = "./notfound.png"
-                }}
-            />
+            <LazyImage imgSrc={data?.Picture?.PictureUrl1} />
             <Title>
                 {data?.Name ?
                     data?.Name?.length > 15 ? `${data.Name.substr(0, 15)}...` : data.Name :
@@ -175,7 +140,7 @@ const SmallCard = ({ data, category }) => {
                 }
             </Title>
             <LocationBar>
-                <MapIcon src={"./Icons/Icon/map.png"} />
+                <MapIcon />
                 {data?.Address ?
                     data?.Address?.length > 15 ? `${data.Address.substr(0, 15)}...` : data.Address
                     :

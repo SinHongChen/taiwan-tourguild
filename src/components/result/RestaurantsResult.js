@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SmallCardRow } from 'components/hub/CarRowHub';
+import { SmallCardRow } from 'components/hub/CarRows';
 import useRestaurant from 'hook/useRestaurant';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -50,7 +50,7 @@ const RestaurantsResultBySearch = ({
     const [haveNextPage, setHaveNextPage] = useState(false);
     const [isNotFound, setIsNotFound] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
 
     const searchRestaurants = (page) => {
         let skip = (page - 1) * slice;
@@ -101,7 +101,6 @@ const RestaurantsResultBySearch = ({
 
     const handlePreviousPageBtnClick = () => {
         if (currentPage > 1) {
-            console.log(currentPage - 1)
             history.push(`/searchResult?city=${city}&category=${category}&keyword=${keyword}&page=${currentPage - 1}`);
         }
     }
@@ -149,7 +148,7 @@ const RestaurantsResultByPosition = ({
     const [isNotFound, setIsNotFound] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
     const [haveNextPage, setHaveNextPage] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
 
     const checkHaveCoord = (lat, lon) => {
         return lat && lon;
@@ -243,7 +242,7 @@ const RestaurantsResultByClass = ({
     const [haveNextPage, setHaveNextPage] = useState(false);
     const [isNotFound, setIsNotFound] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
 
 
     const searchRestaurants = (page) => {

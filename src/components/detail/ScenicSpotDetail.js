@@ -3,14 +3,20 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { GrNext } from "react-icons/gr";
 import { device } from "components/layout/device";
 import Carousel from 'components/basic/Carousel';
-import useActivity from 'hook/useActivity';
 import { ResultByPosition } from 'components/result/Results';
 import useScenicSpot from 'hook/useScenicSpot';
 import GoogleMap from 'components/basic/GoogleMap';
 import { ScenicSpotsResultByClass } from 'components/result/ScenicSpotsResult';
+import {
+    Phone as PhoneIcon,
+    Train as TrainIcon,
+    Ticket as TicketIcon,
+    Location as LocationIcon,
+    Time as TimeIcon,
+    Exclamation as ExclamationIcon
+} from "components/basic/SmallIcons";
 
 //#region styled component
 const Container = styled.div`
@@ -93,10 +99,6 @@ const Description = styled.div`
     }
 `
 
-const Icon = styled.img`
-    width: 22px;
-    height: 22px;
-`
 const Label = styled.div`
     color:var(--text-color-1);
 `
@@ -180,27 +182,27 @@ const ScenicSpotDetail = ({ className, style, id }) => {
                 <Description>{scenicSpot.scenicSpots[0]?.DescriptionDetail}</Description>
 
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <TrainIcon />
                     <Label>{`${scenicSpot.scenicSpots[0]?.TravelInfo ? `${scenicSpot.scenicSpots[0]?.TravelInfo}` : "無路線資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <TimeIcon />
                     <Label>{`開放時間 : ${scenicSpot.scenicSpots[0]?.OpenTime ? `${scenicSpot.scenicSpots[0]?.OpenTime}` : "無開放時間資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/map.png" />
+                    <ExclamationIcon />
                     <Label>{scenicSpot.scenicSpots[0]?.Remarks ? scenicSpot.scenicSpots[0]?.Remarks : "無注意事項資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/ticket.png" />
+                    <TicketIcon />
                     <Label>{scenicSpot.scenicSpots[0]?.TicketInfo ? scenicSpot.scenicSpots[0]?.TicketInfo : "無票價資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/map.png" />
+                    <LocationIcon />
                     <Label>{scenicSpot.scenicSpots[0]?.Address ? scenicSpot.scenicSpots[0]?.Address : "無位置資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/tel.png" />
+                    <PhoneIcon />
                     <Label>{scenicSpot.scenicSpots[0]?.Phone ? scenicSpot.scenicSpots[0]?.Phone : "無電話資訊"}</Label>
                 </Row>
 

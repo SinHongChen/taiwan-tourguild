@@ -11,6 +11,11 @@ import { ResultByPosition } from 'components/result/Results';
 import useRestaurant from 'hook/useRestaurant';
 import GoogleMap from 'components/basic/GoogleMap';
 import { RestaurantsResultByClass } from 'components/result/RestaurantsResult';
+import {
+    Phone as PhoneIcon,
+    Location as LocationIcon,
+    Time as TimeIcon,
+} from "components/basic/SmallIcons";
 
 //#region styled component
 const Container = styled.div`
@@ -93,10 +98,6 @@ const Description = styled.div`
     }
 `
 
-const Icon = styled.img`
-    width: 22px;
-    height: 22px;
-`
 const Label = styled.div`
     color:var(--text-color-1);
 `
@@ -160,7 +161,6 @@ const RestaurantDetail = ({ className, style, id }) => {
         } else {
             setPictures(["./notfound.png"])
         }
-        console.log(restaurant.restaurants[0])
     }, [restaurant.restaurants])
 
     return (
@@ -178,15 +178,15 @@ const RestaurantDetail = ({ className, style, id }) => {
                 <Description>{restaurant.restaurants[0]?.Description}</Description>
 
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <TimeIcon />
                     <Label>{`營業時間 : ${restaurant.restaurants[0]?.OpenTime ? `${restaurant.restaurants[0]?.OpenTime}` : "無營業時間資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/map.png" />
+                    <LocationIcon />
                     <Label>{restaurant.restaurants[0]?.Address ? restaurant.restaurants[0]?.Address : "無位置資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/tel.png" />
+                    <PhoneIcon />
                     <Label>{restaurant.restaurants[0]?.Phone ? restaurant.restaurants[0]?.Phone : "無電話資訊"}</Label>
                 </Row>
             </Content>

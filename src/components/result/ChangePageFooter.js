@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { CaretRight as CaretRightIcon, CaretLeft as CaretLeftIcon } from "components/basic/SmallIcons";
 
 const CurrentPage = styled.div`
     padding: 0px 30px;
@@ -41,6 +42,13 @@ const Footer = styled.div`
     margin: 20px 0;
 `
 
+const NextBtnIcon = styled(CaretRightIcon)`
+    color: var(--text-color-3);
+`
+
+const PreBtnIcon = styled(CaretLeftIcon)`
+    color: var(--text-color-1);
+`
 
 const ChangePageFooter = ({
     currentPage,
@@ -55,7 +63,7 @@ const ChangePageFooter = ({
                 <PreviousPageButton
                     onClick={handlePreviousPageBtnClick}
                 >
-                    <img src="./Icons/Icon/previous-1.png" alt="上一頁" />
+                    <PreBtnIcon />
                 </PreviousPageButton>
             }
             <CurrentPage>
@@ -65,7 +73,7 @@ const ChangePageFooter = ({
                 <NextPageButton
                     onClick={handleNextPageBtnClick}
                 >
-                    <img src="./Icons/Icon/next-1.png" alt="下一頁" />
+                    <NextBtnIcon />
                 </NextPageButton>
             }
         </Footer>

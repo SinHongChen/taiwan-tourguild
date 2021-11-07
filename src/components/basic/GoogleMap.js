@@ -17,7 +17,6 @@ const GoogleMap = ({ coord }) => {
     });
 
     useEffect(() => {
-        console.log(coord)
         loader.load().then(
             (google) => {
                 new google.maps.Map(document.getElementById("map-container"), {

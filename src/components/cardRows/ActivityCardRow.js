@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ActivityCard } from "components/hub/CardHub";
+import { ActivityCard } from "components/hub/Cards";
 import { device } from "components/layout/device";
 import PropTypes from "prop-types"
 

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, Select, SearchButton, GpsButton } from "components/hub/BasicComponentHub";
+import { Searchbar, Select, SearchButton, GpsButton } from "components/hub/BasicComponents";
 import { useHistory, useLocation } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
 import { device } from "components/layout/device";
+
 
 const Container = styled.form`
     z-index:var(--general-searchbar-index);
@@ -122,7 +123,7 @@ const GeneralSearchbar = () => {
                 <Label>台北、台中、台南、屏東、宜蘭……遊遍台灣
                 </Label>
                 <Row>
-                    <Input onChange={(event) => {
+                    <Searchbar onChange={(event) => {
                         updateSearchParams({ keyword: event.target.value })
                     }} value={searchParams.keyword} />
                     <SearchButton onClick={handleSearchBtn} />

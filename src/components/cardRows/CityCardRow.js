@@ -1,16 +1,17 @@
 import useMedia from 'hook/useMedia';
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { CityCard } from 'components/hub/CardHub';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { CityCard } from 'components/hub/Cards';
 import { device } from "components/layout/device";
-import PropTypes from "prop-types"
-
+import PropTypes from "prop-types";
+import { CaretLeft, CaretRight } from "components/basic/SmallIcons";
 
 //#region styled component
 
 const Container = styled.div`
     position: relative;
     width: 100%;
+
     @media ${device.desktop}{
         overflow: visible;
         padding: 0 30px;
@@ -147,12 +148,22 @@ const NextButton = styled.a`
     }
 `
 
-const NextIcon = styled.img`
-
+const NextIcon = styled(CaretRight)`
+    width: 100%;
+    font-size: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    color: white;
 `
 
-const PreviousIcon = styled.img`
-
+const PreviousIcon = styled(CaretLeft)`
+    width: 100%;
+    font-size: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    color: white;
 `
 
 
@@ -169,7 +180,6 @@ const convertListToCityMenu = (list, index, size) => {
 
 //#endregion
 
-//TODO: 城市跟 Carousel 一樣透過動畫滑動
 const CityCardRow = ({ list, title, logo, show = true }) => {
     const { mediaWidth, isPc } = useMedia();
     const [cityCardScrollIndex, setCityCardScrollIndex] = useState(0);
@@ -225,12 +235,12 @@ const CityCardRow = ({ list, title, logo, show = true }) => {
                     <NextButton
                         onClick={handleNextCard}
                     >
-                        <NextIcon src="./Icons/Icon/next-1.png" />
+                        <NextIcon />
                     </NextButton>
                     <PreviousButton
                         onClick={handlePreviousCard}
                     >
-                        <PreviousIcon src="./Icons/Icon/previous-1.png" />
+                        <PreviousIcon />
                     </PreviousButton>
                 </>
             }

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Input, Select, SearchButton, GpsButton } from "components/hub/BasicComponentHub";
-import { useHistory, useLocation } from "react-router-dom"
+import { Select, SearchButton } from "components/hub/BasicComponents";
+import { useHistory } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
 import { device } from "components/layout/device";
 

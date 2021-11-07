@@ -47,10 +47,6 @@ const Slider = styled.span`
 
 const Switch = ({ callback, defaultStatus }) => {
 
-  useEffect(() => {
-    console.log(`default ${defaultStatus}`)
-  }, [])
-
   return (
     <Container onClick={() => { callback(!defaultStatus); }}>
       <Slider status={defaultStatus} />

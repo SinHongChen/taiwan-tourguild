@@ -1,5 +1,5 @@
 import './App.css';
-import { BasicLayout } from 'components/hub/LayoutHub';
+import BasicLayout from 'components/layout/BasicLayout';
 import { Route, useLocation } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';

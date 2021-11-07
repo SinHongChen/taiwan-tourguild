@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { AiFillCaretRight, AiFillCaretLeft } from "react-icons/ai";
+import { CaretRight as CaretRightIcon, CaretLeft as CaretLeftIcon } from "components/basic/SmallIcons";
 import { useEffect } from 'react';
 import PropTypes from "prop-types"
 
@@ -73,12 +73,17 @@ const PreBtn = styled.button`
     }
 `
 
-const Icon = styled.div`
+const NextBtnIcon = styled(CaretRightIcon)`
     color: white;
-    font-size: 22px;
-    height: 22px;
+    width: 100%;
+    text-align: center;
 `
 
+const PreBtnIcon = styled(CaretLeftIcon)`
+    color: white;
+    width: 100%;
+    text-align: center;
+`
 const PictureProgressbar = styled.div`
     width: 100%;
     display: flex;
@@ -121,9 +126,7 @@ const Carousel = ({ imgs, width, height }) => {
                     }
                 }}
             >
-                <Icon>
-                    <AiFillCaretRight />
-                </Icon>
+                <NextBtnIcon />
             </NextBtn>
             <PreBtn
                 onClick={() => {
@@ -132,10 +135,7 @@ const Carousel = ({ imgs, width, height }) => {
                     }
                 }}
             >
-                <Icon>
-                    <AiFillCaretLeft />
-                </Icon>
-
+                <PreBtnIcon />
             </PreBtn>
             <PictureProgressbar>
                 {imgs?.map((img, index) => {

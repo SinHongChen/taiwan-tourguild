@@ -26,7 +26,8 @@ const Main = styled.div`
     max-width: 1700px;
     margin:0 auto;
     height: fit-content;
-    
+
+
     @media ${device.desktop} {
         min-height: calc(100vh - var(--desktop-footer-height) - 550px);
     }

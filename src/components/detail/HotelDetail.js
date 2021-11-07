@@ -3,14 +3,17 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { GrNext } from "react-icons/gr";
 import { device } from "components/layout/device";
 import Carousel from 'components/basic/Carousel';
-import useActivity from 'hook/useActivity';
 import { ResultByPosition } from 'components/result/Results';
 import useHotel from 'hook/useHotel';
 import GoogleMap from 'components/basic/GoogleMap';
 import { HotelsResultByClass } from 'components/result/HotelsResult';
+import {
+    Car as CarIcon,
+    Location as LocationIcon,
+    Phone as PhoneIcon
+} from "components/basic/SmallIcons";
 
 //#region styled component
 const Container = styled.div`
@@ -93,10 +96,6 @@ const Description = styled.div`
     }
 `
 
-const Icon = styled.img`
-    width: 22px;
-    height: 22px;
-`
 const Label = styled.div`
     color:var(--text-color-1);
 `
@@ -176,15 +175,15 @@ const HotelDetail = ({ className, style, id }) => {
                 </Header>
                 <Description>{hotel.hotels[0]?.Description}</Description>
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <CarIcon />
                     <Label>{`${hotel.hotels[0]?.ParkingInfo ? `${hotel.hotels[0]?.ParkingInfo}` : "無結束時間資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/map.png" />
+                    <LocationIcon />
                     <Label>{hotel.hotels[0]?.Address ? hotel.hotels[0]?.Address : "無位置資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/tel.png" />
+                    <PhoneIcon />
                     <Label>{hotel.hotels[0]?.Phone ? hotel.hotels[0]?.Phone : "無電話資訊"}</Label>
                 </Row>
             </Content>

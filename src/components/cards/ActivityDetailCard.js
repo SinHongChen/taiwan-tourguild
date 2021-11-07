@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { GrNext } from "react-icons/gr";
-import { device } from "components/layout/device";
 import Carousel from 'components/basic/Carousel';
+import { device } from 'components/layout/device';
+
+//#region styled component
 
 const Container = styled.div`
     padding:14px 28px;
@@ -109,6 +110,8 @@ const WebSiteLink = styled.a`
     font-size: 14px;
     color:var(--text-color-4);
 `
+
+//#endregion
 
 const ActivityDetailCard = ({ className, style, activity }) => {
     const [pictures, setPictures] = useState([]);

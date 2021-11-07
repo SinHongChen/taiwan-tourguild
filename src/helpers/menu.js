@@ -30,7 +30,7 @@ const getCityIndexByValue = (value) => {
     let index = cityMenu.findIndex((city) => {
         return city.value === value
     })
-    if (index != -1) {
+    if (index !== -1) {
         return index;
     }
     return 0;

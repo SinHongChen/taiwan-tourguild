@@ -10,6 +10,7 @@ import { ActivityResultBySearch } from 'components/result/ActivityResult';
 import { HotelsResultBySearch } from 'components/result/HotelsResult';
 import { ScenicSpotsResultBySearch } from 'components/result/ScenicSpotsResult';
 import { RestaurantsResultBySearch } from 'components/result/RestaurantsResult';
+import { CityCardRow } from 'components/hub/CarRows';
 
 //#region styled component
 
@@ -94,6 +95,11 @@ const CitySearchResult = () => {
 
     return (
         <Container>
+            <CityCardRow
+                title={"城市探索"}
+                list={cityMenu.slice(1)}
+                logo={"triangle"}
+            />
             {getCityIndexByValue(city) !== 0 &&
                 <CityHeader>
                     <TriangleLogo show={true} />
@@ -114,7 +120,7 @@ const CitySearchResult = () => {
                 city={city}
                 keyword={keyword}
                 slice={slice}
-                title={"hotel"}
+                title={"推薦住宿"}
                 category={""}
                 enablePageChange={false}
             />

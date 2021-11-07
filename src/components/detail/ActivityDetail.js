@@ -10,6 +10,13 @@ import useActivity from 'hook/useActivity';
 import { ResultByPosition } from 'components/result/Results';
 import GoogleMap from 'components/basic/GoogleMap';
 import { ActivityResultByClass } from 'components/result/ActivityResult';
+import {
+    Phone as PhoneIcon,
+    Ticket as TicketIcon,
+    Location as LocationIcon,
+    Time as TimeIcon,
+} from "components/basic/SmallIcons";
+
 //#region styled component
 const Container = styled.div`
     background: var(--bg-color-1);
@@ -91,10 +98,6 @@ const Description = styled.div`
     }
 `
 
-const Icon = styled.img`
-    width: 22px;
-    height: 22px;
-`
 const Label = styled.div`
     color:var(--text-color-1);
 `
@@ -175,23 +178,23 @@ const ActivityDetail = ({ className, style, id }) => {
                 <Description>{activity.activityInfos[0]?.Description}</Description>
 
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <TimeIcon />
                     <Label>{`開始 : ${activity.activityInfos[0]?.StartTime ? `${new Date(activity.activityInfos[0]?.StartTime).toLocaleString()}` : "無開始時間資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/time.png" />
+                    <TimeIcon />
                     <Label>{`結束 : ${activity.activityInfos[0]?.EndTime ? `${new Date(activity.activityInfos[0]?.EndTime).toLocaleString()}` : "無結束時間資訊"}`}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/ticket.png" />
+                    <TicketIcon />
                     <Label>{activity.activityInfos[0]?.Charge ? activity.activityInfos[0]?.Charge : "無票價資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/map.png" />
+                    <LocationIcon />
                     <Label>{activity.activityInfos[0]?.Address ? activity.activityInfos[0]?.Address : "無位置資訊"}</Label>
                 </Row>
                 <Row>
-                    <Icon src="./Icons/Icon/tel.png" />
+                    <PhoneIcon />
                     <Label>{activity.activityInfos[0]?.Phone ? activity.activityInfos[0]?.Phone : "無電話資訊"}</Label>
                 </Row>
             </Content>

@@ -7,7 +7,7 @@ import {
     Heavy,
     Umbrella,
     Cloud
-} from 'components/icons/Weather';
+} from 'components/basic/WeatherIcons';
 import { fetchWeatherByCityName } from 'api/fetchWeather';
 import dayjs from 'dayjs';
 import styled from 'styled-components';

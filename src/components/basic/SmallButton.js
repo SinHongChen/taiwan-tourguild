@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { GPS as GPSIcon, Search as SearchIcon } from "components/basic/SmallIcons";
 
 //#region styled component
 
@@ -21,15 +22,25 @@ const Button = styled.button`
     }
 `
 
-const Icon = styled.img`
+const ModifySearchIcon = styled(SearchIcon)`
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    color: white;
+`
+
+const ModifyGpsIcon = styled(GPSIcon)`
+    color: white;
 
 `
+
+
 //#endregion
 
 const SearchButton = ({ onClick }) => {
     return (
         <Button type="submit" onClick={onClick}>
-            <Icon src="./Icons/Icon/search.png" />
+            <ModifySearchIcon />
         </Button>
     )
 }
@@ -37,7 +48,7 @@ const SearchButton = ({ onClick }) => {
 const GpsButton = ({ onClick }) => {
     return (
         <Button type="button" onClick={onClick} color="yellow">
-            <Icon src="./Icons/Icon/GPS.png" />
+            <ModifyGpsIcon />
         </Button>
     )
 }

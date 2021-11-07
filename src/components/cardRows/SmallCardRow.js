@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { SmallCard } from "components/hub/CardHub";
-import useMedia from 'hook/useMedia';
+import { SmallCard } from "components/hub/Cards";
 import { device } from "components/layout/device";
 import { Searching } from 'components/animation/Animations';
-import { NoFoundData, TriangleLogo, RectangleLogo } from 'components/hub/BasicComponentHub';
-import PropTypes from "prop-types";
-import { useLocation } from 'react-router-dom';
-import LazyLoadingImage from 'components/basic/LazyLoadingImage';
+import { ShowNoFoundData, TriangleLogo, RectangleLogo } from 'components/hub/BasicComponents';
+import LazyLoadingSection from 'components/basic/LazyLoadingSection';
 
 //#region styled component
 const Container = styled.div`
@@ -114,14 +111,14 @@ const SmallCardRow = ({
                 <div>{title}</div>
             </Title>
             <SearchingAnimation show={isSearching} />
-            <NoFoundData show={isNotFound && !isSearching} />
-            <LazyLoadingImage >
+            <ShowNoFoundData show={isNotFound && !isSearching} />
+            <LazyLoadingSection>
                 <CardRow show={!isSearching}>
                     {list?.map((data, index) => {
                         return <SmallCard key={index} data={data} category={category} />
                     })}
                 </CardRow>
-            </LazyLoadingImage>
+            </LazyLoadingSection>
         </Container>
 
     )

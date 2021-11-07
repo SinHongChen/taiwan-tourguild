@@ -4,6 +4,8 @@ import { device } from "components/layout/device";
 import useMedia from 'hook/useMedia';
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
+import { Location as LocationIcon } from 'components/basic/SmallIcons';
+
 
 //#region styled component
 const Container = styled(Link)`
@@ -188,9 +190,10 @@ const Address = styled.div`
     justify-content: flex-start;
 `
 
-const AddressIcon = styled.img`
-    width: 24px;
-    height: 24px;
+const AddressIcon = styled(LocationIcon)`
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
     margin-right: 5px;
 `
 
@@ -246,7 +249,7 @@ const ActivityCard = ({ data }) => {
                     src={data?.Picture.PictureUrl1 ? data.Picture.PictureUrl1 : "./notfound.png"}
                     loaded={imageLoaded}
                     onLoad={() => { setImageLoaded(true) }}
-                    onError={() => { console.log("圖片載入失敗") }}
+                    onError={(ex) => { console.error(ex) }}
                 />
             </Left>
             <Right>
@@ -263,7 +266,7 @@ const ActivityCard = ({ data }) => {
                 }
                 <Row>
                     <Address>
-                        <AddressIcon src={"./Icons/Icon/map.png"} />
+                        <AddressIcon />
                         {data?.Address?.length > 25 ? `${data?.Address.substr(0, 25)}...` : data?.Address}
                     </Address>
                     <DetailButton>查看詳請</DetailButton>

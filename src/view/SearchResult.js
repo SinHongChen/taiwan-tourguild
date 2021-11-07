@@ -24,7 +24,7 @@ const Container = styled.div`
     }
 
     @media ${device.mobile}{
-        padding: 40px 0px;
+        padding: 20px 0px;
     }
 `
 
