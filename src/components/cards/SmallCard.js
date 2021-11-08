@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
 import {
@@ -18,20 +18,20 @@ const Container = styled(Link)`
     text-decoration: none;
     @media ${device.desktop}{
         width: 100%;
-        max-width: 300px;
-        height: 260px;
+        max-width: 400px;
+        height: 320px;
     }
 
     @media ${device.tablet}{
         width: 100%;
         max-width: 300px;
-        height: 235px;
+        height: 260px;
     }
 
     @media ${device.mobile}{
         width: 100%;
-        max-width: 300px;
-        height: 205px;
+        max-width: 400px;
+        height: 260px;
     }
 
     &:before {

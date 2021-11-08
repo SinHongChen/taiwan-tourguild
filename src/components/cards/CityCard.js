@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import PropTypes from "prop-types"
 import { Location as LocationIcon } from 'components/basic/SmallIcons';
 

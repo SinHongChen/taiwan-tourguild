@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Select, SearchButton } from "components/hub/BasicComponents";
+import Select from 'components/basic/Select';
+import { SearchButton } from 'components/basic/SmallButton';
 import { useHistory } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 const Container = styled.form`
     z-index:var(--general-searchbar-index);

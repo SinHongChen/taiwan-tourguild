@@ -4,7 +4,7 @@ import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
 import Carousel from 'components/basic/Carousel';
-import { device } from 'components/layout/device';
+import { device } from "helpers/device";
 
 //#region styled component
 

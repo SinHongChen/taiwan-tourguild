@@ -1,8 +1,8 @@
 import useMedia from 'hook/useMedia';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CityCard } from 'components/hub/Cards';
-import { device } from "components/layout/device";
+import CityCard from 'components/cards/CityCard';
+import { device } from "helpers/device";
 import PropTypes from "prop-types";
 import { CaretLeft, CaretRight } from "components/basic/SmallIcons";
 

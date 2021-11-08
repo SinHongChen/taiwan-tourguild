@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Font1 } from 'components/styled/Font'
-import { device } from 'components/layout/device'
+import { device } from "helpers/device";
 
 const Container = styled.div`
     height: fit-content;

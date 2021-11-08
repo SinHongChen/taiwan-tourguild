@@ -10,7 +10,7 @@ import BusRoute from 'components/header/BusRoute';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectGpsEnable } from "slice/positionSlice";
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import { useState } from 'react';
 
 

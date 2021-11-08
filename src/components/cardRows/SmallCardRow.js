@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SmallCard } from "components/hub/Cards";
-import { device } from "components/layout/device";
+import SmallCard from 'components/cards/SmallCard';
+import { device } from "helpers/device";
 import { Searching } from 'components/animation/Animations';
-import { ShowNoFoundData, TriangleLogo, RectangleLogo } from 'components/hub/BasicComponents';
+import ShowNoFoundData from 'components/basic/ShowNoFoundData';
+import TriangleLogo from 'components/basic/TriangleLogo';
+import RectangleLogo from 'components/basic/RectangleLogo';
 import LazyLoadingSection from 'components/basic/LazyLoadingSection';
 
 //#region styled component
@@ -30,7 +32,7 @@ const CardRow = styled.div`
         align-items: center;
         justify-content: center;
         justify-items: center;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     @media ${device.tablet}{

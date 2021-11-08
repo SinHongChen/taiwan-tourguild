@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 const Container = styled.div`
     width: 100%;

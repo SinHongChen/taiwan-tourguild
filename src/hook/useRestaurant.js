@@ -6,7 +6,6 @@ import {
     fetchHealth
 } from "api/fetchRestaurant";
 import React, { useEffect, useState } from 'react';
-import fakeData from "fakeResponse/Restaurant.json";
 
 const useRestaurant = () => {
 

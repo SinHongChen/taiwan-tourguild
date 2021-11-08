@@ -3,19 +3,19 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { GrNext } from "react-icons/gr";
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import Carousel from 'components/basic/Carousel';
-import useActivity from 'hook/useActivity';
-import { ResultByPosition } from 'components/result/Results';
+import ResultByPosition from 'components/result/ResultByPosition';
 import useRestaurant from 'hook/useRestaurant';
 import GoogleMap from 'components/basic/GoogleMap';
-import { RestaurantsResultByClass } from 'components/result/RestaurantsResult';
+import ResultByClass from 'components/result/ResultByClass';
 import {
     Phone as PhoneIcon,
     Location as LocationIcon,
     Time as TimeIcon,
 } from "components/basic/SmallIcons";
+import ShareLinkbar from './ShareLinkbar';
+
 
 //#region styled component
 const Container = styled.div`
@@ -133,6 +133,11 @@ const CarouselContainer = styled.div`
     }
 `
 
+const PhoneLink = styled.a`
+    text-decoration: none;
+    color: #4287f5;
+`
+
 //#endregion
 
 const RestaurantDetail = ({ className, style, id }) => {
@@ -165,6 +170,9 @@ const RestaurantDetail = ({ className, style, id }) => {
 
     return (
         <Container className={className} style={style}>
+            <ShareLinkbar
+                shareUrl={`${window.location.origin}/#/detail?category=restaurant&id=${restaurant.restaurants[0]?.ID}`}
+            />
             <CarouselContainer>
                 <Carousel imgs={pictures} width={"100%"} height={"100%"} />
             </CarouselContainer>
@@ -187,7 +195,11 @@ const RestaurantDetail = ({ className, style, id }) => {
                 </Row>
                 <Row>
                     <PhoneIcon />
-                    <Label>{restaurant.restaurants[0]?.Phone ? restaurant.restaurants[0]?.Phone : "無電話資訊"}</Label>
+                    {restaurant.restaurants[0]?.Phone ?
+                        <PhoneLink href={`tel:+${restaurant.restaurants[0]?.Phone}`}>{restaurant.restaurants[0]?.Phone}</PhoneLink>
+                        :
+                        <Label>無電話資訊</Label>
+                    }
                 </Row>
             </Content>
             <GoogleMap coord={coord} />
@@ -199,14 +211,15 @@ const RestaurantDetail = ({ className, style, id }) => {
                 slice={5}
                 show={true}
                 title={"也在附近的美食"}
+                canChangePage={false}
             />
-            <RestaurantsResultByClass
+            <ResultByClass
                 slice={5}
                 title={"相同類型美食"}
                 show={true}
                 category={"restaurant"}
-                enablePageChange={false}
-                restaurantClass={restaurant?.restaurants[0]?.Class}
+                canChangePage={false}
+                className={restaurant?.restaurants[0]?.Class}
             />
         </Container>
     )

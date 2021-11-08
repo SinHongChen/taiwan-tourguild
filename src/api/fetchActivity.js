@@ -54,7 +54,6 @@ const fetchActivityByClass = (activityClass, top, skip) => {
 }
 
 
-
 /**
  * 透過關鍵字取得資料
  * @param {*} city 城市

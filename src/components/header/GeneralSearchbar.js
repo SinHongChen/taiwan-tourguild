@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Searchbar, Select, SearchButton, GpsButton } from "components/hub/BasicComponents";
-import { useHistory, useLocation } from "react-router-dom"
+import Searchbar from 'components/basic/Searchbar';
+import Select from 'components/basic/Select';
+import { SearchButton, GpsButton } from 'components/basic/SmallButton';
+import { useHistory } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 
 const Container = styled.form`

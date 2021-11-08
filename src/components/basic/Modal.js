@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineClose } from "react-icons/ai"
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 const Container = styled.div`
     position: fixed;

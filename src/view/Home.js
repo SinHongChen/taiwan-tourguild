@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { ActivityCardRow, CityCardRow } from 'components/hub/CarRows';
+import ActivityCardRow from 'components/cardRows/ActivityCardRow';
+import CityCardRow from 'components/cardRows/CityCardRow';
 import { cityMenu } from "helpers/menu";
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 
 //#region import hook

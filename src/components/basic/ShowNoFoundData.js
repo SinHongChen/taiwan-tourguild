@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Empty } from 'components/animation/Animations';
-import { device } from 'components/layout/device';
+import { device } from "helpers/device";
 
 
 //#region styled component
@@ -38,7 +38,7 @@ const Title = styled.h3`
 
 //#endregion
 
-const NoFoundData = ({ show }) => {
+const ShowNoFoundData = ({ show }) => {
     return (
         <NotFoundSection show={show}>
             <Title >查無資料</Title>
@@ -47,4 +47,4 @@ const NoFoundData = ({ show }) => {
     )
 }
 
-export default NoFoundData
+export default ShowNoFoundData

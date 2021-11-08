@@ -40,7 +40,10 @@ const getCityValueByName = (name) => {
     let city = cityMenu.find((city) => {
         return city.name === name
     })
-    return city.value;
+    if (city) {
+        return city.value;
+    }
+    return "";
 }
 
 const getCityNameByValue = (value) => {
@@ -61,10 +64,32 @@ const categoryMenu = [
     { name: "住宿", value: "hotel" }
 ]
 
+const getCategoryNameByValue = (value) => {
+    let category = categoryMenu.find((category) => {
+        return category.value === value
+    })
+    if (category) {
+        return category.name;
+    }
+    return "";
+}
+
+const getCategoryValueByName = (name) => {
+    let category = categoryMenu.find((category) => {
+        return category.name === name
+    })
+    if (category) {
+        return category.value;
+    }
+    return "";
+}
+
 export {
     cityMenu,
     categoryMenu,
     getCityNameByValue,
     getCityValueByName,
-    getCityIndexByValue
+    getCityIndexByValue,
+    getCategoryNameByValue,
+    getCategoryValueByName
 }

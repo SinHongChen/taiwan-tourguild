@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ActivityCard } from "components/hub/Cards";
-import { device } from "components/layout/device";
+import ActivityCard from 'components/cards/ActivityCard';
+import { device } from "helpers/device";
 import PropTypes from "prop-types"
 
 

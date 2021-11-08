@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styled, { keyframes } from "styled-components";
-import { device } from 'components/layout/device';
+import { device } from "helpers/device";
 
 
 const LoadingImageAnimation = keyframes`
@@ -25,15 +25,15 @@ const Container = styled.img`
     animation:  ${LoadingImageAnimation}  ${props => props.isLoaded === true ? "" : "5s ease infinite"};
 
     @media ${device.desktop}{
-        height: 140px;
+        height: 180px;
     }
 
     @media ${device.tablet}{
-        height: 120px;
+        height: 140px;
     }
 
     @media ${device.mobile}{
-        height: 96px;
+        height: 140px;
     }
 `
 const LazyImage = ({ imgSrc, className }) => {
@@ -48,7 +48,7 @@ const LazyImage = ({ imgSrc, className }) => {
             data-src={imgSrc ? imgSrc : "./notfound.png"}
             onLoad={() => { setIsLoaded(true) }}
             onError={(event) => {
-                event.target.src = "./notfound.png"
+                //event.target.src = "./notfound.png"
             }}
         />
     )

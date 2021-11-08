@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import "style/_variable.scss";
 import { HashRouter, Switch } from "react-router-dom";
-import ScrollTop from "components/layout/ScrollTop";
+import ScrollTop from "components/basic/ScrollTop";
 import store from "store/store";
 import { Provider } from "react-redux"
 

@@ -6,7 +6,6 @@ import {
     fetchHealth
 } from "api/fetchHotel";
 import React, { useState } from 'react'
-import fakeData from "fakeResponse/Hotel.json";
 
 const useHotel = () => {
 

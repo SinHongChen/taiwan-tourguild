@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import useMedia from 'hook/useMedia';
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';

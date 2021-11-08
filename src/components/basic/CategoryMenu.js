@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { device } from "components/layout/device"
+import { device } from "helpers/device";
 import { categoryMenu } from "helpers/menu";
 
 

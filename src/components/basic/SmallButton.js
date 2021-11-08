@@ -37,21 +37,22 @@ const ModifyGpsIcon = styled(GPSIcon)`
 
 //#endregion
 
-const SearchButton = ({ onClick }) => {
+const SearchButton = ({ onClick, className }) => {
     return (
-        <Button type="submit" onClick={onClick}>
+        <Button className={className} type="submit" onClick={onClick}>
             <ModifySearchIcon />
         </Button>
     )
 }
 
-const GpsButton = ({ onClick }) => {
+const GpsButton = ({ onClick, className }) => {
     return (
-        <Button type="button" onClick={onClick} color="yellow">
+        <Button className={className} type="button" onClick={onClick} color="yellow">
             <ModifyGpsIcon />
         </Button>
     )
 }
+
 
 export {
     SearchButton,

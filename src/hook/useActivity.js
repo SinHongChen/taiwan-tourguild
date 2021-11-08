@@ -6,7 +6,6 @@ import {
     fetchHealth
 } from "api/fetchActivity";
 import React, { useState } from 'react';
-import fakeData from "fakeResponse/Activity.json";
 
 const useActivity = () => {
     const [activityInfos, setActivityInfos] = useState([]);

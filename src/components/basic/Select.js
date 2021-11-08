@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 
 
 //#region styled component

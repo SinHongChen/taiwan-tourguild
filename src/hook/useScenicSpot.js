@@ -6,7 +6,6 @@ import {
     fetchHealth
 } from "api/fetchScenicSpot";
 import React, { useState } from 'react'
-import fakeData from "fakeResponse/ScenicSpot.json";
 
 const useScenicSpot = () => {
 

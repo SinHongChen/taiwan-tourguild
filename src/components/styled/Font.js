@@ -1,4 +1,4 @@
-const { styled, css } = require("styled-components");
+const { css } = require("styled-components");
 
 const Font1 = css`
     font-family: Noto Sans TC;

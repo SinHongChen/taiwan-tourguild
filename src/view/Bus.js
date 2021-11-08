@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { device } from 'components/layout/device'
+import { device } from "helpers/device";
 import { Font1 } from 'components/styled/Font'
 const Container = styled.div`
     padding: 50px 0;

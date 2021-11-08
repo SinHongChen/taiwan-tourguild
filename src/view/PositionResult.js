@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import CategoryMenu from 'components/basic/CategoryMenu';
 import { categoryMenu } from "helpers/menu";
-import { ResultByPosition } from 'components/result/Results';
+import ResultByPosition from 'components/result/ResultByPosition';
 import { useSelector } from 'react-redux';
 import { selectCoord } from "slice/positionSlice";
 
@@ -30,6 +30,7 @@ const PositionResult = () => {
                         slice={10}
                         show={category.value === selectedCategory}
                         distance={10000}
+                        canChangePage={false}
                     />
                 )
             })}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
 import styled from 'styled-components';
-import { device } from "components/layout/device";
-import { ResultBySearch } from 'components/result/Results';
+import { device } from "helpers/device";
+import ResultBySearch from 'components/result/ResultBySearch';
 import CityWeatherBar from 'components/basic/CityWeatherBar';
-import { cityMenu, getCityNameByValue, getCityIndexByValue } from 'helpers/menu';
+import { getCityNameByValue, getCityIndexByValue, getCategoryNameByValue } from 'helpers/menu';
 import TriangleLogo from 'components/basic/TriangleLogo';
 //#region styled component
 
@@ -16,7 +16,7 @@ const Container = styled.div`
     grid-row-gap: 20px;
 
     @media ${device.desktop}{
-        padding: 40px 0px;
+        padding: 20px 0px;
     }
 
     @media ${device.tablet}{
@@ -36,28 +36,7 @@ const CityHeader = styled.div`
     font-style: normal;
     font-weight: normal;
     color: var(--text-color-1);
-
-    @media ${device.desktop}{
-        font-size: 20px; 
-    }
-
-    @media ${device.tablet}{
-        font-size: 20px;
-    }
-
-    @media ${device.mobile}{
-        font-size: 18px;
-    }
-`
-
-const CityTitle = styled.div`
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-weight: normal;
-    color: var(--text-color-1);
-    display: flex;
-    align-items: center;
-    height: fit-content;
+    margin-top: 20px;
     @media ${device.desktop}{
         font-size: 20px; 
     }
@@ -102,7 +81,8 @@ const SearchResult = () => {
                 city={city}
                 keyword={keyword}
                 slice={slice}
-                enablePageChange={true}
+                canChangePage={true}
+                title={getCategoryNameByValue(category)}
             />
         </Container>
     )

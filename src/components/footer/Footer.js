@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { device } from "components/layout/device";
+import { device } from "helpers/device";
 import Switch from 'components/basic/Switch';
 import { AiFillMail, AiFillGithub, AiFillLinkedin } from "react-icons/ai"
 
@@ -51,6 +51,7 @@ const Link = styled.a`
     height: 32px;
     font-size: 32px;
     margin: 0px 10px;
+    color:var(--text-color-1);
 `
 
 const DarkInfo = styled.div`
@@ -66,13 +67,13 @@ const Footer = ({ changeDarkModel, darkModeEnabled }) => {
                 Taiwan Tourguide  © Code: Sean  /  Design: KT
             </Info>
             <Contact>
-                <Link>
+                <Link href="mailto:a09342712201@google.com">
                     <AiFillMail />
                 </Link>
-                <Link>
+                <Link href="https://github.com/SinHongChen">
                     <AiFillGithub />
                 </Link>
-                <Link>
+                <Link href="http://linkedin.com/in/信宏-陳-2a52a6206">
                     <AiFillLinkedin />
                 </Link>
             </Contact>
