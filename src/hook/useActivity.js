@@ -76,7 +76,7 @@ const useActivity = () => {
      * @param {*} top 筆數
      * @param {*} skip 跳過幾筆
      */
-    const getActivityInfosBySearch = (city, keyword, top = 10, skip = 0) => {
+    const getActivityInfosByKeywordAndCity = (city, keyword, top = 10, skip = 0) => {
         return new Promise((resolve, reject) => {
             fetchActivityByKeyword(city, keyword, top, skip)
                 .then((data) => {
@@ -117,7 +117,7 @@ const useActivity = () => {
         setTop,
         isApiHealth,
         setActivityInfos,
-        getActivityInfosBySearch,
+        getActivityInfosByKeywordAndCity,
         getActivityInfosByPosition,
         getActivityInfoById,
         getActivityInfosByClass

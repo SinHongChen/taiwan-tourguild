@@ -74,7 +74,7 @@ const useRestaurant = () => {
      * @param {*} top 筆數
      * @param {*} skip 跳過幾筆
      */
-    const getRestaurantsBySearch = (city, keyword, top = 10, skip = 0) => {
+    const getRestaurantsByKeywordAndCity = (city, keyword, top = 10, skip = 0) => {
         return new Promise((resolve, reject) => {
             fetchRestaurantsByKeyword(city, keyword, top, skip)
                 .then((data) => {
@@ -117,7 +117,7 @@ const useRestaurant = () => {
         setTop,
         top,
         getRestaurantsByPosition,
-        getRestaurantsBySearch,
+        getRestaurantsByKeywordAndCity,
         getRestaurantById,
         getRestaurantsByClass
     }

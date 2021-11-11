@@ -1,30 +1,33 @@
 import DispatchHookByCategory from "./DispatchHookByCategory";
 import { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
-import SmallCardRow from "components/cardRows/SmallCardRow";
+import SmallCardRow from "components/rows/SmallCardRow";
 import ChangePageFooter from './ChangePageFooter';
+import styled from "styled-components";
+
+const Container = styled.div`
+
+`
 
 const ResultByClass = ({
     slice,
-    show,
-    className,
-    category,
+    isShow,
     title,
-    canChangePage
+    canChangePage,
+    searchParams,
+    style
 }) => {
     const location = useLocation();
     const sliceExtraNumber = slice + 1;
     const [haveNextPage, setHaveNextPage] = useState(false);
     const [showIsNotFoundAnimation, setShowIsNotFoundAnimation] = useState(false);
     const [showSearchingAnimation, setShowSearchingAnimation] = useState(false);
-    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
     const {
         updateSkip,
-        getSkip,
         updateResultData,
         getResultDataByClass,
         getCurrentResultData
-    } = DispatchHookByCategory(category);
+    } = DispatchHookByCategory(searchParams.category);
 
     /**
      * 檢查有無下一頁,特殊作法!!
@@ -66,16 +69,16 @@ const ResultByClass = ({
 
 
     const searchCurrentPageResult = (currentSkip) => {
-        getResultDataByClass(className, sliceExtraNumber, currentSkip)
+        getResultDataByClass(searchParams.className, sliceExtraNumber, currentSkip)
             .then((data) => {
-                onSearchCurrentPageResultSuccess(data);
+                onSearchCurrentPageResultSucceed(data);
             })
             .catch((err) => {
                 onSearchCurrentPageResultError(err);
             })
     }
 
-    const onSearchCurrentPageResultSuccess = (data) => {
+    const onSearchCurrentPageResultSucceed = (data) => {
         setHaveNextPage(checkHaveNextPage(data, sliceExtraNumber));
         setShowIsNotFoundAnimation(isNotFound(data));
         setShowSearchingAnimation(false);
@@ -93,31 +96,13 @@ const ResultByClass = ({
 
 
     useEffect(() => {
-        if (className !== null && className !== undefined) {
-            let currentSkip = calculateSkip(currentPage, slice);
+        setShowIsNotFoundAnimation(true);
+        console.log(searchParams)
+        if (isParamExist(searchParams.className)) {
+            let currentSkip = calculateSkip(1, slice);
             searchCurrentPageResult(currentSkip);
         }
-    }, [className])
-
-
-    // URL page 參數更新的時候 -> 更新當前頁面 state
-    useEffect(() => {
-        if (canChangePage) {
-            let currentPage = parseInt(new URLSearchParams(location.search).get('page'));
-            let currentSkip = calculateSkip(currentPage, sliceExtraNumber);
-            setCurrentPage(currentSkip);
-            updateSkip(currentSkip);
-        }
-    }, [location.search])
-
-
-    // 當前頁面 state 更新的時候 -> 更新 restaurant 資料
-    useEffect(() => {
-        if (isParamExist(className)) {
-            setShowSearchingAnimation(true);
-            searchCurrentPageResult(currentPage);
-        }
-    }, [currentPage])
+    }, [searchParams])
 
 
     //TODO: 尚未決定要如何處理換頁
@@ -126,26 +111,26 @@ const ResultByClass = ({
     const handlePreviousPageBtnClick = () => { }
 
     return (
-        <div>
+        <Container style={style}>
             <SmallCardRow
-                show={show}
+                isShow={isShow}
                 title={title}
                 list={getCurrentResultData()}
                 logo={"rectangle"}
                 isSearching={showSearchingAnimation}
                 isNotFound={showIsNotFoundAnimation}
-                category={category}
+                category={searchParams.category}
             />
             {canChangePage &&
                 <ChangePageFooter
-                    currentPage={currentPage}
+                    currentPage={searchParams.page}
                     handleNextPageBtnClick={handleNextPageBtnClick}
                     handlePreviousPageBtnClick={handlePreviousPageBtnClick}
                     haveNextPage={haveNextPage}
                     havePreviousPage={false}
                 />
             }
-        </div>
+        </Container>
     )
 }
 

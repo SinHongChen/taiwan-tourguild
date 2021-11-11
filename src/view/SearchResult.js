@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
 import styled from 'styled-components';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import ResultBySearch from 'components/result/ResultBySearch';
 import CityWeatherBar from 'components/basic/CityWeatherBar';
 import { getCityNameByValue, getCityIndexByValue, getCategoryNameByValue } from 'helpers/menu';
@@ -15,16 +15,16 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     grid-row-gap: 20px;
 
-    @media ${device.desktop}{
-        padding: 20px 0px;
+    @media ${deviceMedia.desktop}{
+        padding: 60px 0px;
     }
 
-    @media ${device.tablet}{
-        padding: 20px 0 40px 0px;
+    @media ${deviceMedia.tablet}{
+        padding: 40px 0 40px 0px;
     }
 
-    @media ${device.mobile}{
-        padding: 20px 0px;
+    @media ${deviceMedia.mobile}{
+        padding: 40px 0px;
     }
 `
 
@@ -37,15 +37,15 @@ const CityHeader = styled.div`
     font-weight: normal;
     color: var(--text-color-1);
     margin-top: 20px;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         font-size: 20px; 
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         font-size: 20px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         font-size: 18px;
     }
 `
@@ -57,32 +57,37 @@ const CityHeader = styled.div`
 
 const SearchResult = () => {
     const location = useLocation();
-    const [category, setCategory] = useState();
-    const [city, setCity] = useState();
-    const [keyword, setKeyword] = useState();
+    const [searchParams, setSearchParams] = useState({
+        category: "",
+        city: "",
+        keyword: "",
+        page: 1
+    })
     const slice = 40;
 
     useEffect(() => {
-        setCategory(new URLSearchParams(location.search).get('category'))
-        setCity(new URLSearchParams(location.search).get('city'))
-        setKeyword(new URLSearchParams(location.search).get('keyword'))
+        setSearchParams({
+            category: new URLSearchParams(location.search).get('category'),
+            city: new URLSearchParams(location.search).get('city'),
+            keyword: new URLSearchParams(location.search).get('keyword'),
+            page: parseInt(new URLSearchParams(location.search).get('page'))
+        })
     }, [location.search])
 
     return (
         <Container>
-            {getCityIndexByValue(city) !== 0 &&
+            {getCityIndexByValue(searchParams.city) !== 0 &&
                 <CityHeader>
                     <TriangleLogo show={true} />
-                    <CityWeatherBar locationName={getCityNameByValue(city)} />
+                    <CityWeatherBar locationName={getCityNameByValue(searchParams.city)} />
                 </CityHeader>
             }
             <ResultBySearch
-                category={category}
-                city={city}
-                keyword={keyword}
+                title={getCategoryNameByValue(searchParams.category)}
+                isShow={true}
                 slice={slice}
                 canChangePage={true}
-                title={getCategoryNameByValue(category)}
+                searchParams={searchParams}
             />
         </Container>
     )

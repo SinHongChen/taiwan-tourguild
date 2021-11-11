@@ -5,7 +5,7 @@ import Select from 'components/basic/Select';
 import { SearchButton, GpsButton } from 'components/basic/SmallButton';
 import { useHistory } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 
 const Container = styled.form`
@@ -16,18 +16,18 @@ const Container = styled.form`
     align-items: center;
     justify-content: center;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         position: absolute;
         top: var(--desktop-navbar-height);
         height: var(--desktop-banner-height);
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: var(--tablet-general-searchbar-height);
         background-color: var(--bg-color-2);
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: var(--mobile-general-searchbar-height);
         background-color: var(--bg-color-2);
     }
@@ -41,7 +41,7 @@ const Content = styled.div`
     height: fit-content;
     width: fit-content;
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width:100%;
     }
 `
@@ -49,15 +49,15 @@ const Content = styled.div`
 
 const Logo = styled.img`
     height: 50px;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         display: block;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         display: none;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         display: none;
     }
 `
@@ -69,15 +69,15 @@ const Label = styled.label`
     font-size: 14px;
     line-height: 21px;
     color: #FFFFFF;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         display: block;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         display: none;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         display: none;
     }
 `
@@ -88,7 +88,7 @@ const Row = styled.div`
     justify-content: flex-start;
     width: 100%;
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 90%;
         margin:0 auto;
     }

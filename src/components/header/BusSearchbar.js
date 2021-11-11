@@ -4,7 +4,7 @@ import Select from 'components/basic/Select';
 import { SearchButton } from 'components/basic/SmallButton';
 import { useHistory } from "react-router-dom"
 import { cityMenu, categoryMenu } from "helpers/menu";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 const Container = styled.form`
     z-index:var(--general-searchbar-index);
@@ -14,15 +14,15 @@ const Container = styled.form`
     align-items: center;
     justify-content: center;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: var(--desktop-bus-searchbar-height);
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: var(--tablet-bus-searchbar-height);
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: var(--mobile-bus-searchbar-height);
         top:var(--mobile-navbar-height);
         background-color: var(--bg-color-2);
@@ -37,15 +37,15 @@ const Content = styled.div`
     height: fit-content;
     width: fit-content;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width:800px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width:600px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width:100%;
     }
 `
@@ -57,7 +57,7 @@ const Row = styled.div`
     justify-content: flex-start;
     width: 100%;
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 90%;
         margin:0 auto;
     }

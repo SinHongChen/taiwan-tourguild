@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import useMedia from 'hook/useMedia';
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
@@ -19,25 +19,25 @@ const Container = styled(Link)`
     &:hover{
         cursor: pointer;
     }
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 100%;
         max-width: 800px;
         height: 223px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 100%;
         height: 220px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 100%;
         height: 180px;
     }
 
     &:before {
 
-        @media ${device.desktop}{
+        @media ${deviceMedia.desktop}{
             content: "";
             position: absolute;
             bottom: 40px;
@@ -50,7 +50,7 @@ const Container = styled(Link)`
             z-index: -1;
         }
 
-        @media ${device.tablet}{
+        @media ${deviceMedia.tablet}{
             content: "";
             position: absolute;
             bottom: 35px;
@@ -63,7 +63,7 @@ const Container = styled(Link)`
             z-index: -1;
         }
 
-        @media ${device.mobile}{
+        @media ${deviceMedia.mobile}{
             content: "";
             position: absolute;
             bottom: 35px;
@@ -79,7 +79,7 @@ const Container = styled(Link)`
     }
 
     &:after {
-        @media ${device.desktop}{
+        @media ${deviceMedia.desktop}{
             content: "";
             position: absolute;
             bottom: 40px;
@@ -92,7 +92,7 @@ const Container = styled(Link)`
             z-index: -1;
         }
 
-        @media ${device.tablet}{
+        @media ${deviceMedia.tablet}{
             content: "";
             position: absolute;
             bottom: 35px;
@@ -105,7 +105,7 @@ const Container = styled(Link)`
             z-index: -1;
         }
 
-        @media ${device.mobile}{
+        @media ${deviceMedia.mobile}{
             content: "";
             position: absolute;
             bottom: 35px;
@@ -138,17 +138,17 @@ const Image = styled.img`
     display: ${props => props.loaded === true ? "block" : "none"};
     object-fit: cover;
     
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 196px;
         width: 187px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 160px;
         width: 130px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 160px;
         width: 130px;
     }
@@ -162,10 +162,10 @@ const Description = styled.div`
     line-height: 21px;
     color: var(--text-color-2);
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         display: none;
     }
 `
@@ -215,11 +215,11 @@ const DetailButton = styled.button`
     &:hover{
         cursor: pointer;
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         display: none;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         display: none;
     }
 `

@@ -2,6 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { CaretRight as CaretRightIcon, CaretLeft as CaretLeftIcon } from "components/basic/SmallIcons";
 
+
+const Container = styled.div`
+    display: ${props => props.isShow ? "flex" : "none"};
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    
+`
+
+
 const CurrentPage = styled.div`
     padding: 0px 30px;
     color: var(--text-color-1);
@@ -35,12 +45,6 @@ const PreviousPageButton = styled.a`
     }
 `
 
-const Footer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-`
 
 const NextBtnIcon = styled(CaretRightIcon)`
     color: var(--text-color-3);
@@ -55,10 +59,13 @@ const ChangePageFooter = ({
     handleNextPageBtnClick,
     handlePreviousPageBtnClick,
     haveNextPage,
-    havePreviousPage
+    havePreviousPage,
+    isShow
 }) => {
     return (
-        <Footer>
+        <Container
+            isShow={isShow}
+        >
             {havePreviousPage &&
                 <PreviousPageButton
                     onClick={handlePreviousPageBtnClick}
@@ -76,7 +83,7 @@ const ChangePageFooter = ({
                     <NextBtnIcon />
                 </NextPageButton>
             }
-        </Footer>
+        </Container>
     )
 }
 

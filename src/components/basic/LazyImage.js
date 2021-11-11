@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styled, { keyframes } from "styled-components";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 
 const LoadingImageAnimation = keyframes`
@@ -24,15 +24,15 @@ const Container = styled.img`
     display: ${props => props.show === true ? "block" : "none"};
     animation:  ${LoadingImageAnimation}  ${props => props.isLoaded === true ? "" : "5s ease infinite"};
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 180px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 140px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 140px;
     }
 `

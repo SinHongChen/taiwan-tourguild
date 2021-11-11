@@ -53,15 +53,13 @@ const GPS = () => {
     const dispatch = useDispatch();
     const coord = useSelector(selectCoord);
 
-    // 請求 GPS 定位
-    function RequestGPS() {
+    function requestGPS() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(updateCurrentPosition, getPositionError);
         } else {
         }
     }
 
-    // 更新目前定位
     const updateCurrentPosition = (position) => {
         let coord = {
             lat: position.coords.latitude,
@@ -69,20 +67,12 @@ const GPS = () => {
         };
         dispatch(setGpsEnable(true));
         dispatch(setCoord(coord));
-        history.push("/home")
+        history.push("/positionResult")
     }
 
     const getPositionError = (error) => {
         alert("GPS開啟失敗,請確認是否封鎖網站定位")
     }
-
-    const ignore = () => {
-        dispatch(setGpsEnable(false));
-        history.push("/home")
-    }
-
-    useEffect(() => {
-    }, [])
 
 
     return (
@@ -95,15 +85,9 @@ const GPS = () => {
                     </InfoBar>
                     <Btn
                         style={{ color: "var(--text-color-1)" }}
-                        onClick={RequestGPS}
+                        onClick={requestGPS}
                     >
                         開啟定位
-                    </Btn>
-                    <Btn
-                        style={{ color: "var(--text-color-2)" }}
-                        onClick={ignore}
-                    >
-                        略過
                     </Btn>
                 </> :
                 <>
@@ -111,12 +95,14 @@ const GPS = () => {
                         已開啟定位
                     </InfoBar>
                     <InfoBar>
-                        latitude:{coord.lat},
-                        longitude:{coord.lon}
+                        latitude {coord.lat}
+                    </InfoBar>
+                    <InfoBar>
+                        longitude {coord.lon}
                     </InfoBar>
                 </>
             }
-        </Container>
+        </Container >
     )
 }
 

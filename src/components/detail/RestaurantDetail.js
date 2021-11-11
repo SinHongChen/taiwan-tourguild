@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import Carousel from 'components/basic/Carousel';
 import ResultByPosition from 'components/result/ResultByPosition';
 import useRestaurant from 'hook/useRestaurant';
@@ -23,16 +23,19 @@ const Container = styled.div`
     height: fit-content;
     max-width: 1200px;
     margin:0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
     
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         padding:40px 28px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         padding:40px 28px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         padding:40px 14px;
     }
 `
@@ -42,13 +45,13 @@ const Content = styled.div`
     grid-gap: 15px;
     margin: 15px 0px 50px 0px;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         grid-template-columns: 1fr;
     }
 `
@@ -58,15 +61,15 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -86,15 +89,15 @@ const Description = styled.div`
     ${Scrollbar};
     color:var(--text-color-1);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -120,15 +123,15 @@ const WebSiteLink = styled.a`
 
 const CarouselContainer = styled.div`
     width: 100%;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 600px;
  
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 500px;
 
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 400px;
     }
 `
@@ -143,21 +146,37 @@ const PhoneLink = styled.a`
 const RestaurantDetail = ({ className, style, id }) => {
     const [pictures, setPictures] = useState([]);
     const restaurant = useRestaurant();
-    const [coord, setCoord] = useState(null);
+    const [searchParams, setSearchParams] = useState({
+        category: "restaurant",
+        lat: null,
+        lon: null,
+        distance: 10000,
+        page: 1,
+        className: null
+    })
 
     useEffect(() => {
         restaurant.getRestaurantById(id)
             .then((data) => {
-                restaurant.setRestaurants(data);
-                setCoord({
-                    lat: data[0].Position.PositionLat,
-                    lon: data[0].Position.PositionLon
-                })
+                onGetRestaurantByIdSucceed(data);
             })
             .catch((err) => {
                 console.error(err)
             })
     }, [id])
+
+    const onGetRestaurantByIdSucceed = (data) => {
+        restaurant.setRestaurants(data);
+        console.log(data)
+        setSearchParams({
+            category: "restaurant",
+            lat: data[0].Position.PositionLat,
+            lon: data[0].Position.PositionLon,
+            distance: 10000,
+            page: 1,
+            className: data[0]?.Class
+        })
+    }
 
     useEffect(() => {
         let pictureArr = parseJsonToArr(restaurant.restaurants[0]?.Picture);
@@ -202,24 +221,22 @@ const RestaurantDetail = ({ className, style, id }) => {
                     }
                 </Row>
             </Content>
-            <GoogleMap coord={coord} />
+            <GoogleMap lat={searchParams.lat} lon={searchParams.lon} />
             <ResultByPosition
-                category={"restaurant"}
-                lat={coord?.lat}
-                lon={coord?.lon}
-                distance={10000}
+                style={{ marginTop: "30px" }}
                 slice={5}
-                show={true}
+                isShow={true}
                 title={"也在附近的美食"}
                 canChangePage={false}
+                searchParams={searchParams}
             />
             <ResultByClass
+                style={{ marginTop: "30px" }}
                 slice={5}
                 title={"相同類型美食"}
-                show={true}
-                category={"restaurant"}
+                isShow={true}
                 canChangePage={false}
-                className={restaurant?.restaurants[0]?.Class}
+                searchParams={searchParams}
             />
         </Container>
     )

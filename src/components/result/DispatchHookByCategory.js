@@ -65,16 +65,16 @@ const DispatchHookByCategory = (category) => {
         }
     }
 
-    async function getResultDataBySearch(city, keyword, sliceExtraNumber, currentSkip) {
+    async function getResultDataByKeywordAndCity(city, keyword, sliceExtraNumber, currentSkip) {
         switch (category) {
             case "restaurant":
-                return await restaurant.getRestaurantsBySearch(city, keyword, sliceExtraNumber, currentSkip);
+                return await restaurant.getRestaurantsByKeywordAndCity(city, keyword, sliceExtraNumber, currentSkip);
             case "hotel":
-                return await hotel.getHotelsBySearch(city, keyword, sliceExtraNumber, currentSkip);
+                return await hotel.getHotelsByKeywordAndCity(city, keyword, sliceExtraNumber, currentSkip);
             case "activity":
-                return await activity.getActivityInfosBySearch(city, keyword, sliceExtraNumber, currentSkip);
+                return await activity.getActivityInfosByKeywordAndCity(city, keyword, sliceExtraNumber, currentSkip);
             case "scenicSpot":
-                return await scenicSpot.getScenicSpotsBySearch(city, keyword, sliceExtraNumber, currentSkip);
+                return await scenicSpot.getScenicSpotsByKeywordAndCity(city, keyword, sliceExtraNumber, currentSkip);
             default:
         }
     }
@@ -111,7 +111,7 @@ const DispatchHookByCategory = (category) => {
     return {
         updateSkip,
         getResultDataByPosition,
-        getResultDataBySearch,
+        getResultDataByKeywordAndCity,
         updateResultData,
         getCurrentResultData,
         getResultDataByClass,

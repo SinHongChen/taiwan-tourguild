@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import Carousel from 'components/basic/Carousel';
 import ResultByPosition from 'components/result/ResultByPosition';
 import useScenicSpot from 'hook/useScenicSpot';
@@ -26,16 +26,19 @@ const Container = styled.div`
     height: fit-content;
     max-width: 1200px;
     margin:0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
     
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         padding:40px 28px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         padding:40px 28px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         padding:40px 14px;
     }
 `
@@ -45,13 +48,13 @@ const Content = styled.div`
     grid-gap: 15px;
     margin: 15px 0px 50px 0px;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         grid-template-columns: 1fr;
     }
 `
@@ -61,15 +64,15 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -89,15 +92,15 @@ const Description = styled.div`
     ${Scrollbar};
     color:var(--text-color-1);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -123,15 +126,15 @@ const WebSiteLink = styled.a`
 
 const CarouselContainer = styled.div`
     width: 100%;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 600px;
  
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 500px;
 
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 400px;
     }
 `
@@ -146,23 +149,39 @@ const PhoneLink = styled.a`
 const ScenicSpotDetail = ({ className, style, id }) => {
     const [pictures, setPictures] = useState([]);
     const scenicSpot = useScenicSpot();
-    const [coord, setCoord] = useState(null);
+    const [searchParams, setSearchParams] = useState({
+        category: "scenicSpot",
+        lat: null,
+        lon: null,
+        distance: 10000,
+        page: 1,
+        className: null
+    })
 
     useEffect(() => {
         if (id !== null && id !== undefined) {
             scenicSpot.getScenicSpotById(id)
                 .then((data) => {
-                    scenicSpot.setScenicSpots(data);
-                    setCoord({
-                        lat: data[0]?.Position?.PositionLat,
-                        lon: data[0]?.Position?.PositionLon
-                    })
+                    onGetScenicSpotByIdSucceed(data);
                 })
                 .catch((err) => {
                     console.error(err)
                 })
         }
     }, [id])
+
+    const onGetScenicSpotByIdSucceed = (data) => {
+        scenicSpot.setScenicSpots(data);
+        console.log(data)
+        setSearchParams({
+            category: "scenicSpot",
+            lat: data[0].Position.PositionLat,
+            lon: data[0].Position.PositionLon,
+            distance: 10000,
+            page: 1,
+            className: data[0].Class1
+        })
+    }
 
     useEffect(() => {
         if (scenicSpot.scenicSpots.length > 0) {
@@ -222,24 +241,22 @@ const ScenicSpotDetail = ({ className, style, id }) => {
                 </Row>
 
             </Content>
-            <GoogleMap coord={coord} />
+            <GoogleMap lat={searchParams.lat} lon={searchParams.lon} />
             <ResultByPosition
-                category={"scenicSpot"}
-                lat={coord?.lat}
-                lon={coord?.lon}
-                distance={10000}
+                style={{ marginTop: "30px" }}
                 slice={5}
-                show={true}
+                isShow={true}
                 title={"也在附近的景點"}
                 canChangePage={false}
+                searchParams={searchParams}
             />
             <ResultByClass
+                style={{ marginTop: "30px" }}
                 slice={5}
                 title={"相同類型景點"}
-                show={true}
-                category={"scenicSpot"}
+                isShow={true}
                 canChangePage={false}
-                className={scenicSpot?.scenicSpots[0]?.Class1}
+                searchParams={searchParams}
             />
         </Container>
     )

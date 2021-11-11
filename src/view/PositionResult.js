@@ -1,13 +1,35 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import CategoryMenu from 'components/basic/CategoryMenu';
 import { categoryMenu } from "helpers/menu";
 import ResultByPosition from 'components/result/ResultByPosition';
 import { useSelector } from 'react-redux';
-import { selectCoord } from "slice/positionSlice";
+import { selectCoord, selectGpsEnable } from "slice/positionSlice";
+import { useEffect } from 'react';
+import { deviceMedia } from "helpers/device";
+import { useLayoutEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+const Container = styled.div`
+    width: 94%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+
+    @media ${deviceMedia.desktop}{
+        padding: 60px 0px;
+    }
+
+    @media ${deviceMedia.tablet}{
+        padding: 40px 0 40px 0px;
+    }
+
+    @media ${deviceMedia.mobile}{
+        padding: 40px 0px;
+    }
+`
 
 const CategoryResult = styled.div`
-    margin-top: 40px;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 30px;
@@ -15,27 +37,41 @@ const CategoryResult = styled.div`
 
 const PositionResult = () => {
     const coord = useSelector(selectCoord);
-    const [selectedCategory, setSelectedCategory] = useState(categoryMenu[0].value);
-    let lat = coord === null ? 25.0704863 : coord.lat;
-    let lon = coord === null ? 121.4979198 : coord.lon;
-    return (
-        <CategoryResult>
-            <CategoryMenu setSelected={setSelectedCategory} selected={selectedCategory} />
-            {categoryMenu.map((category) => {
-                return (
-                    <ResultByPosition
-                        category={category.value}
-                        lat={lat}
-                        lon={lon}
-                        slice={10}
-                        show={category.value === selectedCategory}
-                        distance={10000}
-                        canChangePage={false}
-                    />
-                )
-            })}
+    const gpsEnabled = useSelector(selectGpsEnable);
+    const history = useHistory();
 
-        </CategoryResult>
+    const [searchParams, setSearchParams] = useState({
+        category: "",
+        lat: coord?.lat,
+        lon: coord?.lon,
+        distance: 10000,
+        page: 1
+    })
+
+    useLayoutEffect(() => {
+        if (!gpsEnabled) {
+            history.push("/GPS");
+        }
+    }, [])
+
+    return (
+        <Container>
+            <CategoryResult>
+                {categoryMenu.map((category, index) => {
+                    return (
+                        <ResultByPosition key={index}
+                            title={`你附近的${category.name}`}
+                            slice={8}
+                            isShow={true}
+                            canChangePage={false}
+                            searchParams={{ ...searchParams, category: category.value }}
+                        />
+                    )
+                })}
+
+            </CategoryResult>
+        </Container>
+
     )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 
 //#region styled component
@@ -28,15 +28,15 @@ const MenuSelect = styled.div`
         border: transparent 5px solid;
         border-top:10px solid var(--text-color-1);
 
-        @media ${device.desktop}{
+        @media ${deviceMedia.desktop}{
             right:10px;
         }
 
-        @media ${device.tablet}{
+        @media ${deviceMedia.tablet}{
             right:10px;
         }
 
-        @media ${device.mobile}{
+        @media ${deviceMedia.mobile}{
             right:10px;
         }
     }

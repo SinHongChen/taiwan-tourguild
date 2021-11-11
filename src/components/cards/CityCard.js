@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import PropTypes from "prop-types"
 import { Location as LocationIcon } from 'components/basic/SmallIcons';
 
@@ -13,17 +13,17 @@ const Container = styled(Link)`
     position: relative;
     background: var(--bg-color-2);
     box-shadow: 0px 4px 3px var(--box-shadow-color-3);
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 100%;
         height: 100%;    
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 140px;
         height: 100%;    
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 140px;
         height: 100%;    
     }

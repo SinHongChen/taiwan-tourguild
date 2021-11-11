@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Empty } from 'components/animation/Animations';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 
 //#region styled component
@@ -18,15 +18,15 @@ const NotFoundSection = styled.div`
 const EmptyAnimation = styled(Empty)`
     height: auto;
     margin:20px auto;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 400px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 250px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 200px;
     }
 `

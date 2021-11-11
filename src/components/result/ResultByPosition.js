@@ -1,32 +1,32 @@
 import DispatchHookByCategory from './DispatchHookByCategory';
 import { useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
-import SmallCardRow from 'components/cardRows/SmallCardRow';
+import SmallCardRow from 'components/rows/SmallCardRow';
 import ChangePageFooter from './ChangePageFooter';
+import styled from 'styled-components';
+
+const Container = styled.div`
+
+`
 
 const ResultByPosition = ({
-    slice,
-    show,
-    lat,
-    lon,
-    distance,
-    category,
     title,
-    canChangePage
+    slice,
+    isShow,
+    canChangePage,
+    searchParams,
+    style,
+    className
 }) => {
     const sliceExtraNumber = slice + 1;
-    const location = useLocation();
     const [showIsNotFoundAnimation, setShowIsNotFoundAnimation] = useState(false);
     const [showSearchingAnimation, setShowSearchingAnimation] = useState(false);
     const [haveNextPage, setHaveNextPage] = useState(false);
-    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
     const {
         updateSkip,
-        getSkip,
         updateResultData,
         getResultDataByPosition,
         getCurrentResultData
-    } = DispatchHookByCategory(category);
+    } = DispatchHookByCategory(searchParams.category);
 
     /**
      * 檢查有無下一頁,特殊作法!!
@@ -68,16 +68,16 @@ const ResultByPosition = ({
 
 
     const searchCurrentPageResult = (currentSkip) => {
-        getResultDataByPosition(lat, lon, distance, sliceExtraNumber, currentSkip)
+        getResultDataByPosition(searchParams.lat, searchParams.lon, searchParams.distance, sliceExtraNumber, currentSkip)
             .then((data) => {
-                onSearchCurrentPageResultSuccess(data)
+                onSearchCurrentPageResultSucceed(data)
             })
             .catch((err) => {
                 onSearchCurrentPageResultError(err);
             })
     }
 
-    const onSearchCurrentPageResultSuccess = (data) => {
+    const onSearchCurrentPageResultSucceed = (data) => {
         setHaveNextPage(checkHaveNextPage(data, sliceExtraNumber));
         setShowIsNotFoundAnimation(isNotFound(data));
         setShowSearchingAnimation(false);
@@ -95,29 +95,13 @@ const ResultByPosition = ({
 
 
     useEffect(() => {
-        if (isParamExist(lat) && isParamExist(lon)) {
-            let currentSkip = calculateSkip(currentPage, slice);
-            searchCurrentPageResult(currentSkip);
-        }
-    }, [lat, lon, distance]);
-
-    // URL search 更新觸發
-    useEffect(() => {
-        if (canChangePage) {
-            let page = parseInt(new URLSearchParams(location.search).get('page'));
-            setCurrentPage(page);
-        }
-    }, [location.search])
-
-
-    useEffect(() => {
-        if (isParamExist(lat) && isParamExist(lon)) {
-            let currentSkip = calculateSkip(currentPage, sliceExtraNumber);
+        if (isParamExist(searchParams.lat) && isParamExist(searchParams.lon)) {
+            let currentSkip = calculateSkip(searchParams.page, sliceExtraNumber);
             setShowSearchingAnimation(true);
             searchCurrentPageResult(currentSkip);
             updateSkip(currentSkip);
         }
-    }, [currentPage])
+    }, [searchParams]);
 
 
     //TODO: 尚未決定要如何處理換頁
@@ -127,19 +111,19 @@ const ResultByPosition = ({
 
 
     return (
-        <div>
+        <Container style={style} className={className}>
             <SmallCardRow
-                show={show}
+                isShow={isShow}
                 title={title}
                 list={getCurrentResultData()}
                 logo={"rectangle"}
                 isSearching={showSearchingAnimation}
                 isNotFound={showIsNotFoundAnimation}
-                category={category}
+                category={searchParams.category}
             />
             {canChangePage &&
                 <ChangePageFooter
-                    currentPage={currentPage}
+                    currentPage={searchParams.page}
                     handleNextPageClick={handleNextPageBtnClick}
                     handlePreviousPageClick={handlePreviousPageBtnClick}
                     haveNextPage={haveNextPage}
@@ -147,7 +131,7 @@ const ResultByPosition = ({
                 />
             }
 
-        </div>
+        </Container>
     )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
 import {
@@ -16,19 +16,19 @@ const Container = styled(Link)`
     margin:9px;
     position: relative;
     text-decoration: none;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 100%;
         max-width: 400px;
         height: 320px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 100%;
         max-width: 300px;
         height: 260px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 100%;
         max-width: 400px;
         height: 260px;
@@ -70,15 +70,15 @@ const Title = styled.div`
     font-size: 14px;
     margin-top: 10px;
     color: var(--text-color-1);
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 52px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 45px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 45px;
     }
 `

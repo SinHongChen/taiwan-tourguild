@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 //#region styled component
 
@@ -20,15 +20,15 @@ const Container = styled.input`
     box-shadow: 0px 4px 3px var(--box-shadow-color-3);
     -webkit-appearance: none;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 445px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 445px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 100%;
     }
 `

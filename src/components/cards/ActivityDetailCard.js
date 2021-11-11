@@ -4,7 +4,7 @@ import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
 import Carousel from 'components/basic/Carousel';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 //#region styled component
 
@@ -13,15 +13,15 @@ const Container = styled.div`
     background: var(--bg-color-1);
     height: fit-content;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         padding:14px 28px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         padding:14px 28px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         padding:14px;
     }
 `
@@ -31,13 +31,13 @@ const Content = styled.div`
     grid-gap: 15px;
     margin-top: 15px;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         grid-template-columns: 1fr;
     }
 `
@@ -47,15 +47,15 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -75,15 +75,15 @@ const Description = styled.div`
     ${Scrollbar};
     color:var(--text-color-1);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 

@@ -1,65 +1,49 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-import SmallCardRow from 'components/cardRows/SmallCardRow';
+import SmallCardRow from 'components/rows/SmallCardRow';
 import ChangePageFooter from './ChangePageFooter';
 import DispatchHookByCategory from './DispatchHookByCategory';
+import styled from 'styled-components';
 
+const Container = styled.div`
+
+`
 
 const ResultBySearch = ({
-    slice,
-    show,
-    city,
-    keyword,
-    category,
     title,
+    slice,
+    isShow,
+    searchParams,
     canChangePage,
+    style,
+    className
 }) => {
     const history = useHistory();
-    const location = useLocation();
     const sliceExtraNumber = slice + 1;
     const [haveNextPage, setHaveNextPage] = useState(false);
     const [showIsNotFoundAnimation, setShowIsNotFoundAnimation] = useState(false);
     const [showSearchingAnimation, setShowSearchingAnimation] = useState(false);
-    const [currentPage, setCurrentPage] = useState(parseInt(new URLSearchParams(location.search).get('page')));
     const {
         updateSkip,
-        getSkip,
         updateResultData,
-        getResultDataBySearch,
+        getResultDataByKeywordAndCity,
         getCurrentResultData
-    } = DispatchHookByCategory(category);
+    } = DispatchHookByCategory(searchParams.category);
 
-    // 搜尋參數更新觸發
     useEffect(() => {
-        if (isParamExist(city) && isParamExist(keyword) && isParamExist(category)) {
-            let currentSkip = calculateSkip(currentPage, slice);
-            setShowSearchingAnimation(true);
-            searchCurrentPageResult(currentSkip);
-        }
-    }, [city, keyword, category]);
+        console.log(searchParams)
+        onSearchParamsEffect(searchParams);
+    }, [searchParams]);
 
-    // URL search 更新觸發
-    useEffect(() => {
-        if (canChangePage && isParamExist(city) && isParamExist(keyword) && isParamExist(category)) {
-            let currentPage = parseInt(new URLSearchParams(location.search).get('page'));
-            let currentSkip = calculateSkip(currentPage, slice);
-            setCurrentPage(currentPage);
+    const onSearchParamsEffect = (searchParams) => {
+        if (isSearchParamsExist(searchParams)) {
+            let currentSkip = calculateSkip(searchParams.page, slice);
             updateSkip(currentSkip);
             setShowSearchingAnimation(true);
             searchCurrentPageResult(currentSkip);
         }
-    }, [location.search]);
+    }
 
-    /**
-     * 檢查有無下一頁,特殊作法!!
-     * step 01. 將分頁的數量 slice 加上 1 賦值給 sliceExtraNumber 
-     * step 02. 每次撈取的 top 參數實際是 sliceExtraNumber , 但是只會顯示 slice 筆數
-     * step 03. 檢查是否每次都有撈到 sliceExtraNumber 數量
-     * step 04. 如果每次都有辦法等於 sliceExtraNumber 代表有下一頁
-     * @param {*} resultDataLength resultData 的數量
-     * @param {*} sliceExtraNumber slice 加 1
-     * @returns 
-     */
     const checkHaveNextPage = (data, sliceExtraNumber) => {
         if (data.length === sliceExtraNumber) {
             return true;
@@ -80,24 +64,32 @@ const ResultBySearch = ({
         return (currentPage - 1) * slice;
     }
 
-    const isParamExist = (param) => {
-        if (param !== undefined && param !== null) {
-            return true;
+    const isSearchParamsExist = (searchParams) => {
+        let values = Object.values(searchParams);
+        for (let i = 0; i < values.length; i++) {
+            if (values[i] === undefined || values[i] === null) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     const searchCurrentPageResult = (currentSkip) => {
-        getResultDataBySearch(city, keyword, sliceExtraNumber, currentSkip)
+        getResultDataByKeywordAndCity(
+            searchParams.city,
+            searchParams.keyword,
+            sliceExtraNumber,
+            currentSkip
+        )
             .then((data) => {
-                onGetResultDataBySearchSuccess(data);
+                onGetResultDataBySearchSucceed(data);
             })
             .catch((err) => {
                 onGetResultDataBySearchError(err);
             })
     }
 
-    const onGetResultDataBySearchSuccess = (data) => {
+    const onGetResultDataBySearchSucceed = (data) => {
         setHaveNextPage(checkHaveNextPage(data, sliceExtraNumber));
         setShowIsNotFoundAnimation(isNotFound(data));
         setShowSearchingAnimation(false);
@@ -113,40 +105,42 @@ const ResultBySearch = ({
         console.error(err);
     }
 
+    const refreshPage = (page) => {
+        history.push(`/searchResult?city=${searchParams.city}&category=${searchParams.category}&keyword=${searchParams.keyword}&page=${page}`);
+    }
 
     const handelNextPageBtnClick = () => {
         if (haveNextPage) {
-            history.push(`/searchResult?city=${city}&category=${category}&keyword=${keyword}&page=${currentPage + 1}`);
+            refreshPage(searchParams.page + 1);
         }
     }
 
     const handelPreviousPageBtnClick = () => {
-        if (currentPage > 1) {
-            history.push(`/searchResult?city=${city}&category=${category}&keyword=${keyword}&page=${currentPage - 1}`);
+        if (searchParams.page > 1) {
+            refreshPage(searchParams.page - 1);
         }
     }
 
     return (
-        <div>
+        <Container style={style} className={className}>
             <SmallCardRow
-                show={show}
+                isShow={isShow}
                 title={title}
                 list={getCurrentResultData()}
                 logo={"rectangle"}
                 isSearching={showSearchingAnimation}
                 isNotFound={showIsNotFoundAnimation}
-                category={category}
+                category={searchParams.category}
             />
-            {canChangePage &&
-                <ChangePageFooter
-                    currentPage={currentPage}
-                    handleNextPageBtnClick={handelNextPageBtnClick}
-                    handlePreviousPageBtnClick={handelPreviousPageBtnClick}
-                    haveNextPage={haveNextPage}
-                    havePreviousPage={currentPage > 1}
-                />
-            }
-        </div>
+            <ChangePageFooter
+                isShow={canChangePage}
+                currentPage={searchParams.page}
+                handleNextPageBtnClick={handelNextPageBtnClick}
+                handlePreviousPageBtnClick={handelPreviousPageBtnClick}
+                haveNextPage={haveNextPage}
+                havePreviousPage={searchParams.page > 1}
+            />
+        </Container>
     )
 }
 

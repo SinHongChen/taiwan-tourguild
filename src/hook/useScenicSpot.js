@@ -76,7 +76,7 @@ const useScenicSpot = () => {
      * @param {*} top 筆數
      * @param {*} skip 跳過幾筆
      */
-    const getScenicSpotsBySearch = (city, keyword, top = 10, skip = 0) => {
+    const getScenicSpotsByKeywordAndCity = (city, keyword, top = 10, skip = 0) => {
         return new Promise((resolve, reject) => {
             fetchScenicSpotsByKeyword(city, keyword, top, skip)
                 .then((data) => {
@@ -117,7 +117,7 @@ const useScenicSpot = () => {
         setTop,
         isApiHealth,
         setScenicSpots,
-        getScenicSpotsBySearch,
+        getScenicSpotsByKeywordAndCity,
         getScenicSpotsByPosition,
         getScenicSpotById,
         getScenicSpotsByClass

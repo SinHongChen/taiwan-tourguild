@@ -6,13 +6,13 @@ const size = {
     mobile: `300px`,
 }
 
-const device = {
+const deviceMedia = {
     desktop: `only screen and  (min-width: ${size.desktop})`,
     tablet: `only screen and  (min-width: ${size.tablet}) and (max-width:${size.desktop_m})`,
     mobile: `only screen and  (min-width: ${size.mobile}) and (max-width:${size.tablet_m})`,
 }
 
 export {
-    device,
+    deviceMedia,
     size
 };

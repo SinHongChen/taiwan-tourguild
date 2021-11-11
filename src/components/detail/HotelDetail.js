@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { parseJsonToArr } from "helpers/parse";
 import { Font1 } from "components/styled/Font";
 import Scrollbar from "components/styled/Scrollbar";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import Carousel from 'components/basic/Carousel';
 import ResultByPosition from 'components/result/ResultByPosition';
 import useHotel from 'hook/useHotel';
@@ -22,16 +22,19 @@ const Container = styled.div`
     height: fit-content;
     max-width: 1200px;
     margin:0 auto;
-    
-    @media ${device.desktop}{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+
+    @media ${deviceMedia.desktop}{
         padding:40px 28px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         padding:40px 28px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         padding:40px 14px;
     }
 `
@@ -41,13 +44,13 @@ const Content = styled.div`
     grid-gap: 15px;
     margin: 15px 0px 50px 0px;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-template-columns: repeat(2,1fr);
     }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         grid-template-columns: 1fr;
     }
 `
@@ -57,15 +60,15 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -85,15 +88,15 @@ const Description = styled.div`
     ${Scrollbar};
     color:var(--text-color-1);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         grid-column-start: 1;
         grid-column-end: 3;    
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         grid-column-start: 1;
         grid-column-end: 3;   
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
     }
 `
 
@@ -119,15 +122,15 @@ const WebSiteLink = styled.a`
 
 const CarouselContainer = styled.div`
     width: 100%;
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         height: 600px;
  
     }
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         height: 500px;
 
      }
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         height: 400px;
     }
 `
@@ -142,21 +145,37 @@ const PhoneLink = styled.a`
 const HotelDetail = ({ className, style, id }) => {
     const [pictures, setPictures] = useState([]);
     const hotel = useHotel();
-    const [coord, setCoord] = useState(null);
+    const [searchParams, setSearchParams] = useState({
+        category: "hotel",
+        lat: null,
+        lon: null,
+        distance: 10000,
+        page: 1,
+        className: null
+    })
 
     useEffect(() => {
         hotel.getHotelById(id)
             .then((data) => {
-                hotel.setHotels(data);
-                setCoord({
-                    lat: data[0].Position.PositionLat,
-                    lon: data[0].Position.PositionLon
-                })
+                onGetHotelByIdSucceed(data);
             })
             .catch((err) => {
                 console.error(err)
             })
     }, [id])
+
+
+    const onGetHotelByIdSucceed = (data) => {
+        hotel.setHotels(data);
+        setSearchParams({
+            category: "hotel",
+            lat: data[0].Position.PositionLat,
+            lon: data[0].Position.PositionLon,
+            distance: 10000,
+            page: 1,
+            className: data[0]?.Class
+        })
+    }
 
     useEffect(() => {
         let pictureArr = parseJsonToArr(hotel.hotels[0]?.Picture);
@@ -166,6 +185,8 @@ const HotelDetail = ({ className, style, id }) => {
             setPictures(["./notfound.png"])
         }
     }, [hotel.hotels])
+
+
 
     return (
         <Container className={className} style={style}>
@@ -200,24 +221,22 @@ const HotelDetail = ({ className, style, id }) => {
                     }
                 </Row>
             </Content>
-            <GoogleMap coord={coord} />
+            <GoogleMap lat={searchParams.lat} lon={searchParams.lon} />
             <ResultByPosition
-                category={"hotel"}
-                lat={coord?.lat}
-                lon={coord?.lon}
-                distance={10000}
-                slice={5}
-                show={true}
+                style={{ marginTop: "30px" }}
                 title={"也在附近的旅館"}
+                slice={5}
+                isShow={true}
                 canChangePage={false}
+                searchParams={searchParams}
             />
             <ResultByClass
+                style={{ marginTop: "30px" }}
                 slice={5}
                 title={"相同類型旅館"}
-                show={true}
-                category={"hotel"}
+                isShow={true}
                 canChangePage={false}
-                className={hotel?.hotels[0]?.Class}
+                searchParams={searchParams}
             />
         </Container>
     )

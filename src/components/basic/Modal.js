@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineClose } from "react-icons/ai"
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 const Container = styled.div`
     position: fixed;
@@ -32,21 +32,21 @@ const Content = styled.div`
     box-shadow: 1px 1px 15px rgba(100,100,100,1);
     overflow: auto;
     background-color: var(--bg-color-1);
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 800px;
         max-height: 96%;
         margin-top: 2vh;
         padding: 0px 0px 50px 0px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 600px;
         max-height: 96%;
         margin-top: 2vh;
         padding: 0px 0px 50px 0px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 100%;
         height: 100%;
         padding: 50px 0px 150px 0px;
@@ -60,7 +60,7 @@ const CloseBtn = styled.a`
     background: var(--pink);
     box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         width: 45px;
         height: 45px;
         position: absolute;
@@ -69,7 +69,7 @@ const CloseBtn = styled.a`
         border-radius: 8px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         width: 45px;
         height: 45px;
         position: absolute;
@@ -78,7 +78,7 @@ const CloseBtn = styled.a`
         border-radius: 8px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         width: 100%;
         height: 40px;
         position: fixed;
@@ -96,17 +96,17 @@ const CloseIcon = styled.div`
     font-size: 28px;
     color: var(--text-color-3);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         font-size: 28px;
         height: 28px;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         font-size: 28px;
         height: 28px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         font-size: 16px;
         height: 16px;
     }

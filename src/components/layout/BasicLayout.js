@@ -10,7 +10,7 @@ import BusRoute from 'components/header/BusRoute';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectGpsEnable } from "slice/positionSlice";
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import { useState } from 'react';
 
 
@@ -28,15 +28,15 @@ const Main = styled.div`
     height: fit-content;
 
 
-    @media ${device.desktop} {
+    @media ${deviceMedia.desktop} {
         min-height: calc(100vh - var(--desktop-footer-height) - 550px);
     }
 
-    @media ${device.tablet} {
+    @media ${deviceMedia.tablet} {
         min-height: calc(100vh - var(--tablet-footer-height) - 214px);
     }
 
-    @media ${device.mobile} {
+    @media ${deviceMedia.mobile} {
         min-height: calc(100vh - var(--mobile-footer-height) - 240px);
     }
 `

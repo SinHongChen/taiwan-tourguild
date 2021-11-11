@@ -167,23 +167,27 @@ const PreviousIcon = styled(CaretLeft)`
 `
 
 
+
+
+//#endregion
+
+
 const convertListToCityMenu = (list, index, size) => {
     let sliceList = list.slice(index, index + size);
     let cityMenu = [];
 
     for (let i = 0; i < Math.ceil(sliceList.length / 3); i++) {
-        cityMenu.push(sliceList.slice(i, i + 3));
+        cityMenu.push(sliceList.slice(i * 3, i * 3 + 3));
     }
 
     return cityMenu;
 }
 
-//#endregion
-
 const CityCardRow = ({ list, title, logo, show = true }) => {
     const { mediaWidth, isPc } = useMedia();
     const [cityCardScrollIndex, setCityCardScrollIndex] = useState(0);
     const [cityMenu, setCityMenu] = useState(convertListToCityMenu(list, 0, 9))
+
 
     useEffect(() => {
         if (isPc()) {
@@ -192,6 +196,8 @@ const CityCardRow = ({ list, title, logo, show = true }) => {
             setCityMenu(convertListToCityMenu(list, 0, list.length));
         }
     }, [mediaWidth])
+
+
 
 
     const handleNextCard = () => {
@@ -222,10 +228,12 @@ const CityCardRow = ({ list, title, logo, show = true }) => {
                             <FullFrame>
                                 <CityCard city={data[0]} />
                             </FullFrame>
-                            <HalfFrame>
-                                <CityCard city={data[1]} />
-                                <CityCard city={data[2]} />
-                            </HalfFrame>
+                            {data[1] && data[2] &&
+                                <HalfFrame>
+                                    <CityCard city={data[1]} />
+                                    <CityCard city={data[2]} />
+                                </HalfFrame>
+                            }
                         </>
                     )
                 })}

@@ -11,11 +11,10 @@ import LazyLoadingSection from 'components/basic/LazyLoadingSection';
 //#region styled component
 const Container = styled.div`
     width: 100%;
-    display: ${props => props.show ? "block" : "none"};
+    display: ${props => props.isShow ? "block" : "none"};
     z-index: var(--smallcardrow-index);
     position: relative;
     padding: 0;
-    margin-top: 30px;
     @media ${deviceMedia.tablet}{
     }
 
@@ -99,14 +98,14 @@ const SmallCardRow = ({
     list,
     title,
     logo,
-    show = true,
+    isShow = true,
     isNotFound,
     isSearching,
     category
 }) => {
 
     return (
-        <Container show={show}>
+        <Container isShow={isShow}>
             <Title>
                 <RectangleLogo show={logo === "rectangle"} />
                 <TriangleLogo show={logo === "triangle"} />

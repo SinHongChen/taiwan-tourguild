@@ -6,12 +6,13 @@ import styled from 'styled-components';
 import { Loading as LoadingAnimation } from 'components/animation/Animations';
 import { Font1 } from 'components/styled/Font';
 
-const HomeView = lazy(() => import("view/Home"))
-const SearchResultView = lazy(() => import("view/SearchResult"))
-const CitySearchResultView = lazy(() => import("view/CitySearchResult"))
-const BusView = lazy(() => import("view/Bus"))
-const GPSView = lazy(() => import("view/GPS"))
-const DetailView = lazy(() => import("view/Detail"))
+const HomeView = lazy(() => import("view/Home"));
+const PositionResultView = lazy(() => import("view/PositionResult"));
+const SearchResultView = lazy(() => import("view/SearchResult"));
+const CitySearchResultView = lazy(() => import("view/CitySearchResult"));
+const BusView = lazy(() => import("view/Bus"));
+const GPSView = lazy(() => import("view/GPS"));
+const DetailView = lazy(() => import("view/Detail"));
 
 
 const BigLoadingAnimation = styled(LoadingAnimation)`
@@ -44,7 +45,7 @@ function App() {
         <Route exact path="/home" component={HomeView} />
         <Route exact path="/searchResult" component={SearchResultView} />
         <Route exact path="/citySearchResult" component={CitySearchResultView} />
-        <Route exact path="/positionResult" component={SearchResultView} />
+        <Route exact path="/positionResult" component={PositionResultView} />
         <Route exact path="/bus" component={BusView} />
         <Route exact path="/gps" component={GPSView} />
         <Route exact path="/detail" component={DetailView} />

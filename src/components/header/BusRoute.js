@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Font1 } from 'components/styled/Font'
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 const Container = styled.div`
     height: fit-content;
@@ -11,15 +11,15 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr;
 
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         padding: 0 20%;
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         padding: 0 20%;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         padding: 0 5%;
     }
 `

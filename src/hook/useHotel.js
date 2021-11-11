@@ -76,7 +76,7 @@ const useHotel = () => {
      * @param {*} top 筆數
      * @param {*} skip 跳過幾筆
      */
-    const getHotelsBySearch = (city, keyword, top = 10, skip = 0) => {
+    const getHotelsByKeywordAndCity = (city, keyword, top = 10, skip = 0) => {
         return new Promise((resolve, reject) => {
             fetchHotelsByKeyword(city, keyword, top, skip)
                 .then((data) => {
@@ -117,7 +117,7 @@ const useHotel = () => {
         isApiHealth,
         setHotels,
         getHotelsByPosition,
-        getHotelsBySearch,
+        getHotelsByKeywordAndCity,
         getHotelById,
         getHotelsByClass
     }

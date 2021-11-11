@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import { categoryMenu } from "helpers/menu";
 
 
@@ -8,13 +8,13 @@ const Container = styled.div`
     align-items: center;
     box-shadow: 1px 1px 5px var(--box-shadow-color-3);
     height: fit-content;
-    @media ${device.desktop}{        
+    @media ${deviceMedia.desktop}{        
         width: fit-content;
     }
-    @media ${device.tablet}{        
+    @media ${deviceMedia.tablet}{        
         width: 100%;
     }
-    @media ${device.mobile}{        
+    @media ${deviceMedia.mobile}{        
         width: 100%;
     }
 `
@@ -28,16 +28,16 @@ const CategoryMenuItem = styled.div`
         cursor: pointer;
         color: ${props => props.selected ? "var(--pink)" : "var(--text-color-1)"};
     }
-    @media ${device.desktop}{        
+    @media ${deviceMedia.desktop}{        
         padding: 8px 25px;
     }
-    @media ${device.tablet}{        
+    @media ${deviceMedia.tablet}{        
         padding: 8px 25px;
         min-width: fit-content;
         width: 100%;
         text-align:center;
     }
-    @media ${device.mobile}{        
+    @media ${deviceMedia.mobile}{        
         padding: 8px 0px;
         width: 100%;
         min-width: fit-content;

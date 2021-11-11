@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 
 const Container = styled.div`
     width: 100%;
@@ -8,7 +8,7 @@ const Container = styled.div`
     z-index: var(--header-index);
     height: fit-content;
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         &:before {
             content: "";
             position: absolute;
@@ -36,7 +36,7 @@ const Container = styled.div`
         }
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         &:before {
             content: "";
             position: absolute;
@@ -64,7 +64,7 @@ const Container = styled.div`
         }
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         &:before {
             content: "";
             position: absolute;

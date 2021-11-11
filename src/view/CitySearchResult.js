@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
 import styled from 'styled-components';
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import CityWeatherBar from 'components/basic/CityWeatherBar';
-import { categoryMenu, getCityNameByValue, getCityIndexByValue } from 'helpers/menu';
+import { categoryMenu, getCityNameByValue, getCityIndexByValue, cityMenu } from 'helpers/menu';
 import TriangleLogo from 'components/basic/TriangleLogo';
 import ResultBySearch from 'components/result/ResultBySearch';
+import CityLinkRow from 'components/rows/CityLinkRow';
+import { More } from 'components/basic/SmallIcons';
 
 //#region styled component
 
@@ -16,16 +18,16 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     grid-row-gap: 20px;
 
-    @media ${device.desktop}{
-        padding: 40px 0px;
+    @media ${deviceMedia.desktop}{
+        padding: 60px 0px;
     }
 
-    @media ${device.tablet}{
-        padding: 40px 0 40px 0px;
+    @media ${deviceMedia.tablet}{
+        padding: 60px 0 40px 0px;
     }
 
-    @media ${device.mobile}{
-        padding: 40px 0px;
+    @media ${deviceMedia.mobile}{
+        padding: 60px 0px;
     }
 `
 
@@ -38,17 +40,24 @@ const CityHeader = styled.div`
     font-weight: normal;
     color: var(--text-color-1);
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         font-size: 20px; 
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         font-size: 20px;
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         font-size: 18px;
     }
+`
+
+const MoreCityCollapseBtn = styled.a`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 `
 
 //#endregion
@@ -61,14 +70,24 @@ const CitySearchResult = () => {
     const [city, setCity] = useState();
     const [keyword, setKeyword] = useState();
     const slice = 8;
-
+    const [searchParams, setSearchParams] = useState({
+        category: "",
+        city: "",
+        keyword: "",
+        page: 1
+    })
     useEffect(() => {
-        setCity(new URLSearchParams(location.search).get('city'))
-        setKeyword(new URLSearchParams(location.search).get('keyword'))
+        setSearchParams({
+            category: "",
+            city: new URLSearchParams(location.search).get('city'),
+            keyword: "",
+            page: 1
+        })
     }, [location.search])
 
     return (
         <Container>
+            <CityLinkRow cityMenu={cityMenu.slice(1)} />
             {getCityIndexByValue(city) !== 0 &&
                 <CityHeader>
                     <TriangleLogo show={true} />
@@ -77,13 +96,11 @@ const CitySearchResult = () => {
             }
             {categoryMenu.map((category) => {
                 return (<ResultBySearch
-                    show={true}
-                    city={city}
-                    keyword={keyword}
-                    slice={slice}
                     title={`推薦${category.name}`}
-                    category={category.value}
+                    slice={slice}
+                    isShow={true}
                     canChangePage={false}
+                    searchParams={{ ...searchParams, category: category.value }}
                 />)
             })}
         </Container>

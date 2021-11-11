@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { device } from "helpers/device";
+import { deviceMedia } from "helpers/device";
 import { Font1 } from 'components/styled/Font'
 const Container = styled.div`
     padding: 50px 0;
@@ -48,21 +48,21 @@ const Dashboard = styled.div`
         z-index: -1;
     }
 
-    @media ${device.desktop}{
+    @media ${deviceMedia.desktop}{
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-gap: 10px;
         grid-row-gap: 25px; 
     }
 
-    @media ${device.tablet}{
+    @media ${deviceMedia.tablet}{
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-gap: 10px;   
         grid-row-gap: 25px; 
     }
 
-    @media ${device.mobile}{
+    @media ${deviceMedia.mobile}{
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 10px;    }
