@@ -249,7 +249,7 @@ const ActivityCard = ({ data }) => {
                     src={data?.Picture.PictureUrl1 ? data.Picture.PictureUrl1 : "./notfound.png"}
                     loaded={imageLoaded}
                     onLoad={() => { setImageLoaded(true) }}
-                    onError={(ex) => { console.error(ex) }}
+                    onError={(ex) => { console.warn(ex) }}
                 />
             </Left>
             <Right>

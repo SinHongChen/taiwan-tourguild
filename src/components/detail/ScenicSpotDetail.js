@@ -172,7 +172,6 @@ const ScenicSpotDetail = ({ className, style, id }) => {
 
     const onGetScenicSpotByIdSucceed = (data) => {
         scenicSpot.setScenicSpots(data);
-        console.log(data)
         setSearchParams({
             category: "scenicSpot",
             lat: data[0].Position.PositionLat,

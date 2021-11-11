@@ -167,7 +167,6 @@ const RestaurantDetail = ({ className, style, id }) => {
 
     const onGetRestaurantByIdSucceed = (data) => {
         restaurant.setRestaurants(data);
-        console.log(data)
         setSearchParams({
             category: "restaurant",
             lat: data[0].Position.PositionLat,

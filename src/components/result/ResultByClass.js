@@ -97,7 +97,6 @@ const ResultByClass = ({
 
     useEffect(() => {
         setShowIsNotFoundAnimation(true);
-        console.log(searchParams)
         if (isParamExist(searchParams.className)) {
             let currentSkip = calculateSkip(1, slice);
             searchCurrentPageResult(currentSkip);

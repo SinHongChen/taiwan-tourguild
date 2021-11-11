@@ -31,7 +31,6 @@ const ResultBySearch = ({
     } = DispatchHookByCategory(searchParams.category);
 
     useEffect(() => {
-        console.log(searchParams)
         onSearchParamsEffect(searchParams);
     }, [searchParams]);
 
